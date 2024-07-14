@@ -1,0 +1,277 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tangerine_delivery_ahamove
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e-20240110\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-12 08:09+0000\n"
+"PO-Revision-Date: 2024-06-12 08:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__ahamove_api_key
+msgid "API Key"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__active
+msgid "Active"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:delivery.carrier,name:tangerine_delivery_ahamove.tangerine_delivery_ahamove_provider
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__delivery_carrier__delivery_type__ahamove
+msgid "Ahamove"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:delivery.carrier,carrier_description:tangerine_delivery_ahamove.tangerine_delivery_ahamove_provider
+msgid ""
+"Ahamove APIs will allow shipper to easily place, cancel, get quotes and "
+"track the order via simple integration"
+msgstr "API Ahamove sẽ cho phép người gửi hàng dễ dàng đặt, hủy, nhận báo giá và "
+"track the order via simple integration"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_res_country_state__ahamove_province_code
+msgid "Ahamove Code"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_ahamove_service
+msgid "Ahamove Service"
+msgstr "Dịch vụ Ahamove"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_ahamove_service_request
+msgid "Ahamove Service Request"
+msgstr "Dịch vụ đặc biệt Ahamove"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_choose_delivery_carrier__ahamove_service_request_domain
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__ahamove_service_request_domain
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_stock_picking__ahamove_service_request_domain
+msgid "Ahamove Service Request Domain"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model_terms:ir.ui.view,arch_db:tangerine_delivery_ahamove.view_warehouse_inherit_ahamove
+#: model_terms:ir.ui.view,arch_db:tangerine_delivery_ahamove.view_warehouse_tree_inherit_ahamove
+msgid "Ahamove Service Sync"
+msgstr "Đồng bộ dịch vụ Ahamove"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__delivery_carrier__default_ahamove_payment_method__balance
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__stock_picking__ahamove_payment_method__balance
+msgid "BALANCE"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__delivery_carrier__default_ahamove_payment_method__cash
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__stock_picking__ahamove_payment_method__cash
+msgid "CASH"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__delivery_carrier__default_ahamove_payment_method__cash_by_recipient
+#: model:ir.model.fields.selection,name:tangerine_delivery_ahamove.selection__stock_picking__ahamove_payment_method__cash_by_recipient
+msgid "CASH BY RECIPIENT"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__code
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__code
+msgid "Code"
+msgstr "Mã"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_res_country_state
+msgid "Country state"
+msgstr "Tỉnh/TP/Bang"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__create_uid
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__create_date
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_choose_delivery_carrier
+msgid "Delivery Carrier Selection Wizard"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:product.template,name:tangerine_delivery_ahamove.product_product_delivery_ahamove_product_template
+msgid "Delivery charges"
+msgstr "Phí vận chuyển"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__description
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__description
+msgid "Description"
+msgstr "Mô tả"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__display_name
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__id
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__id
+msgid "ID"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__write_uid
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__write_date
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__name
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__name
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__ahamove_partner_name
+msgid "Name"
+msgstr "Tên"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__default_ahamove_payment_method
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_stock_picking__ahamove_payment_method
+msgid "Payment Method"
+msgstr "Phương thức thanh toán"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__ahamove_partner_phone
+msgid "Phone"
+msgstr "Số điện thoại"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_choose_delivery_carrier__promo_code
+msgid "Promotion Code"
+msgstr "Mã khuyến mãi"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__delivery_type
+msgid "Provider"
+msgstr "Nhà cung cấp"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__ahamove_refresh_token
+msgid "Refresh Token"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_choose_delivery_carrier__ahamove_service_request_ids
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__default_ahamove_service_request_ids
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_stock_picking__ahamove_service_request_ids
+msgid "Request Type"
+msgstr "Yêu cầu đặt biệt"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__request_ids
+msgid "Requests"
+msgstr "Yêu cầu đặt biệt"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.actions.act_window,name:tangerine_delivery_ahamove.ahamove_service_action
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service_request__service_id
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_choose_delivery_carrier__ahamove_service_id
+msgid "Service"
+msgstr "Dịch vụ"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.actions.act_window,name:tangerine_delivery_ahamove.ahamove_service_request_action
+msgid "Service Request"
+msgstr "Dịch vụ đặt biệt"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_delivery_carrier__default_ahamove_service_id
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_stock_picking__ahamove_service_id
+msgid "Service Type"
+msgstr "Dịch vụ"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_stock_warehouse__ahamove_service_ids
+#: model_terms:ir.ui.view,arch_db:tangerine_delivery_ahamove.view_warehouse_inherit_ahamove
+msgid "Services"
+msgstr "Dịch vụ"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_stock_picking__ahamove_shared_link
+msgid "Shared Link"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr ""
+
+#. module: tangerine_delivery_ahamove
+#. odoo-python
+#: code:addons/tangerine_delivery_ahamove/models/stock_warehouse.py:0
+#, python-format
+msgid ""
+"The address of warehouse not set ahamove code. Please mapping ahamove code"
+msgstr ""
+"Địa chỉ kho chưa đặt mã ahamove. Vui lòng đặt mã ahamove cho kho"
+
+#. module: tangerine_delivery_ahamove
+#. odoo-python
+#: code:addons/tangerine_delivery_ahamove/api/client.py:0
+#, python-format
+msgid "The ahamove code is not set on warehouse address"
+msgstr "Mã ahamove không được đặt trên địa chỉ kho"
+
+#. module: tangerine_delivery_ahamove
+#. odoo-python
+#: code:addons/tangerine_delivery_ahamove/models/delivery_ahamove.py:0
+#, python-format
+msgid "The field API key is required"
+msgstr "Trường API Key bắt buộc nhập"
+
+#. module: tangerine_delivery_ahamove
+#. odoo-python
+#: code:addons/tangerine_delivery_ahamove/models/delivery_ahamove.py:0
+#, python-format
+msgid "The field phone is required"
+msgstr "Trường số điện thoại bắt buộc nhập"
+
+#. module: tangerine_delivery_ahamove
+#. odoo-python
+#: code:addons/tangerine_delivery_ahamove/api/client.py:0
+#, python-format
+msgid "The warehouse is required on sale order"
+msgstr "Trường kho hàng bắt buộc nhập"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_stock_picking
+msgid "Transfer"
+msgstr "Điều chuyển"
+
+#. module: tangerine_delivery_ahamove
+#: model:ir.model,name:tangerine_delivery_ahamove.model_stock_warehouse
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_ahamove_service__warehouse_id
+msgid "Warehouse"
+msgstr "Kho hàng"
+

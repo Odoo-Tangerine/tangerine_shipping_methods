@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="delivery.status" id="viettelpost_status_1">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Tạo đơn hàng</field>
+            <field name="code">100</field>
+            <field name="description">Viettelpost xử lý đơn hàng</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_2">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">ViettelPost yêu cầu hủy đơn hàng</field>
+            <field name="code">101</field>
+            <field name="description">ViettelPost yêu cầu hủy đơn hàng</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_3">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Đơn hàng chờ xử lý</field>
+            <field name="code">102</field>
+            <field name="description">Đơn hàng chờ xử lý</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_4">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Giao cho bưu cục</field>
+            <field name="code">103</field>
+            <field name="description">Viettelpost xử lý đơn hàng</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_5">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Giao cho Bưu tá đi nhận</field>
+            <field name="code">104</field>
+            <field name="description">Giao cho Bưu tá đi nhận</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_6">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Bưu Tá đã nhận hàng</field>
+            <field name="code">105</field>
+            <field name="description">Buu Tá đã nhận hàng</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_7">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Đối tác yêu cầu lấy lại hàng</field>
+            <field name="code">106</field>
+            <field name="description">Buu Tá đã nhận hàng</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_8">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Đối tác yêu cầu hủy qua API</field>
+            <field name="code">107</field>
+            <field name="description">Đối tác yêu cầu hủy qua API</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_9">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Nhận từ bưu tá - Bưu cục gốc</field>
+            <field name="code">200</field>
+            <field name="description">Nhập doanh thu</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_10">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Hủy nhập phiếu gửi</field>
+            <field name="code">201</field>
+            <field name="description">Hủy nhập phiếu gửi</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_11">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Sửa phiếu gửi</field>
+            <field name="code">202</field>
+            <field name="description">Sửa phiếu gửi</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_12">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Đóng bảng kê đi</field>
+            <field name="code">300</field>
+            <field name="description">Vận chuyển đi từ</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_13">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Ðóng túi gói</field>
+            <field name="code">301</field>
+            <field name="description">Vận chuyển đi từ</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_14">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Đóng Chuyến thư</field>
+            <field name="code">302</field>
+            <field name="description">Vận chuyển đi từ</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_15">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Đóng tuyến xe</field>
+            <field name="code">303</field>
+            <field name="description">Vận chuyển đi từ</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_16">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Nhận bảng kê đến</field>
+            <field name="code">400</field>
+            <field name="description">Nhận tại</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_17">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Nhận Túi gói</field>
+            <field name="code">401</field>
+            <field name="description">Nhận tại</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_18">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Nhận chuyến thư</field>
+            <field name="code">402</field>
+            <field name="description">Nhận tại</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_19">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Nhận chuyến xe</field>
+            <field name="code">403</field>
+            <field name="description">Nhận tại</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_20">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Giao bưu tá đi phát</field>
+            <field name="code">500</field>
+            <field name="description">Giao bưu tá đi phát</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_21">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Thành công - Phát thành công</field>
+            <field name="code">501</field>
+            <field name="description">Thành công - Phát thành công</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_22">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Chuyển hoàn bưu cục gốc</field>
+            <field name="code">502</field>
+            <field name="description">Chuyển hoàn bưu cục gốc</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_23">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Hủy - Theo yêu cầu khách hàng</field>
+            <field name="code">503</field>
+            <field name="description">Hủy - Theo yêu cầu khách hàng</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_24">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Thành công - Chuyển trả người gửi</field>
+            <field name="code">504</field>
+            <field name="description">Thành công - Chuyển trả người gửi</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_25">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Tồn - Thông báo chuyển hoàn bưu cục gốc</field>
+            <field name="code">505</field>
+            <field name="description">Tồn - Thông báo chuyển hoàn bưu cục gốc</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_26">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Tồn - Khách hàng nghỉ, không có nhà</field>
+            <field name="code">506</field>
+            <field name="description">Tồn - Khách hàng nghỉ, không có nhà</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_27">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Tồn - Khách hàng đến bưu cục nhận</field>
+            <field name="code">507</field>
+            <field name="description">Tồn - Khách hàng đến bưu cục nhận</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_28">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Phát tiếp</field>
+            <field name="code">508</field>
+            <field name="description">Đơn vị yêu cầu phát tiếp</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_29">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Chuyển tiếp bưu cục khác</field>
+            <field name="code">509</field>
+            <field name="description">Chuyển tiếp bưu cục khác</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_30">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Hủy phân công phát</field>
+            <field name="code">510</field>
+            <field name="description">Hủy phân công phát</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_31">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Duyệt hoàn</field>
+            <field name="code">515</field>
+            <field name="description">Bưu cục phát duyệt hoàn</field>
+        </record>
+        
+        <record model="delivery.status" id="viettelpost_status_32">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Phát tiếp</field>
+            <field name="code">550</field>
+            <field name="description">Khách hàng yêu cầu phát tiếp</field>
+        </record>
+    </data>
+</odoo>
