@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form_inherit_delivery_base" model="ir.ui.view">
+        <field name="name">view.picking.withcarrier.out.form.inherit.delivery.base</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_delivery.view_picking_withcarrier_out_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='tracking']" position="after">
+                <field name="delivery_status_id"/>
+                <field name="delivery_status_code" invisible="True"/>
+            </xpath>
+            <field name="carrier_tracking_ref" position="after">
+                <button name="%(carrier_ref_order_action)d"
+                        type="action"
+                        context="{'search_default_picking_id': id}"
+                        class="oi oi-search oe_link"
+                        invisible="not carrier_tracking_ref"
+                />
+            </field>
+            <xpath expr="//group[@name='carrier_data']" position="after">
+                <group name='delivery_carrier_data' invisible="carrier_tracking_ref" string="Provider Shipping Information">
+                    <label for="cash_on_delivery"/>
+                    <div class="o_row">
+                        <field name="cash_on_delivery" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
+                        <field name="cash_on_delivery_amount" readonly="carrier_tracking_ref" invisible="not cash_on_delivery"/>
+                    </div>
+                    <field name="promo_code" readonly="carrier_tracking_ref"/>
+                    <label for="schedule_order"/>
+                    <div class="o_row">
+                        <field name="schedule_order" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
+                        <strong invisible="not schedule_order">From:</strong>
+                        <field name="schedule_pickup_time_from"
+                               invisible="not schedule_order"
+                               required="schedule_order"
+                               readonly="carrier_tracking_ref"
+                        />
+                        <strong invisible="not schedule_order">To:</strong>
+                        <field name="schedule_pickup_time_to"
+                               invisible="not schedule_order"
+                               required="schedule_order"
+                               readonly="carrier_tracking_ref"
+                        />
+                    </div>
+                    <field name="remarks"/>
+                    <field name="currency_id" invisible="1"/>
+                </group>
+                <group name="delivery_driver_data" string="Driver Information">
+                    <field name="driver_name" string="Name"/>
+                    <field name="driver_phone" string="Phone" widget="phone"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

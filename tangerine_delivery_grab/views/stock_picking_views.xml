@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form_inherit_delivery_grab" model="ir.ui.view">
+        <field name="name">view.picking.withcarrier.out.form.inherit.delivery.grab</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='promo_code']" position="before">
+                <field name="grab_service_type" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
+                <field name="grab_vehicle_type" invisible="delivery_type != 'grab'"/>
+                <field name="grab_payment_method" invisible="delivery_type != 'grab'"/>
+                <field name="grab_cod_type" invisible="delivery_type != 'grab'"/>
+                <field name="grab_payer" invisible="delivery_type != 'grab'"/>
+                <field name="grab_high_value" widget="boolean_toggle" invisible="delivery_type != 'grab'"/>
+            </xpath>
+            <xpath expr="//field[@name='driver_phone']" position="after">
+                <field name="grab_driver_license_plate" string="License Plate" invisible="delivery_type != 'grab'"/>
+                <field name="grab_driver_photo_url" string="Photo URL" widget="url" invisible="delivery_type != 'grab'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

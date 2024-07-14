@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="carrier_ref_order_form_view_inherit_grab" model="ir.ui.view">
+        <field name="name">carrier.ref.order.form.view.inherit.grab</field>
+        <field name="model">carrier.ref.order</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.carrier_ref_order_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='driver_phone']" position="after">
+                <field name="grab_driver_license_plate" invisible="delivery_type != 'grab'"/>
+                <field name="grab_driver_photo_url" invisible="delivery_type != 'grab'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

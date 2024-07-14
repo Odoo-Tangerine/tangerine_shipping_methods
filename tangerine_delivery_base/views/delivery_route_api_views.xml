@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="delivery_route_api_form_view" model="ir.ui.view">
+        <field name="name">delivery.route.api.form.view</field>
+        <field name="model">delivery.route.api</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="active" invisible="1"/>
+                <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="toggle_active" string="Archived" type="object" class="oe_stat_button" icon="fa-archive"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="provider_id" placeholder="Provider"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="method"/>
+                        </group>
+                        <group>
+                            <field name="headers" widget="code" options="{'mode': 'js'}"/>
+                            <field name="domain"/>
+                            <field name="route"/>
+                            <field name="is_need_access_token" widget="boolean_toggle"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                     <field name="message_follower_ids" widget="mail_followers"/>
+                     <field name="message_ids" colspan="4" widget="mail_thread" nolabel="1"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="delivery_route_api_tree_view" model="ir.ui.view">
+        <field name="name">delivery.route.api.tree.view</field>
+        <field name="model">delivery.route.api</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="domain"/>
+                <field name="route"/>
+                <field name="method"/>
+                <field name="is_need_access_token" widget="boolean_toggle"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="delivery_route_api_search_view" model="ir.ui.view">
+        <field name="name">delivery.route.api.search.view</field>
+        <field name="model">delivery.route.api</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="create_date"/>
+                <field name="name"/>
+                <field name="code"/>
+                <separator/>
+                <group expand="1" name="group_route_api" string="Group By">
+                    <filter string="Provider" name="provider" domain="[]" context="{'group_by':'provider_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="delivery_route_api_action" model="ir.actions.act_window">
+        <field name="name">Route APIs</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">delivery.route.api</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('delivery_route_api_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('delivery_route_api_form_view')})]"/>
+        <field name="search_view_id" ref="delivery_route_api_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new delivery instance endpoints
+            </p>
+        </field>
+        <field name="context">{'active_test': False, 'search_default_provider': True}</field>
+    </record>
+</odoo>

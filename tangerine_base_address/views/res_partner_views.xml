@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_partner_form_view_inherit_by_tangerine" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_address_format')]/field[@name='state_id']" position="replace">
+                <field name="state_id" placeholder="Please choose a State"
+                       options="{'no_open': True, 'no_quick_create': True}"
+                       readonly="type != 'contact' and parent_id"
+                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                <field name="district_id" placeholder="Please choose a District" string="District" options="{&quot;no_open&quot;: True}" class="oe_edit_only"/>
+                <field name="ward_id" placeholder="Please choose a Ward" string="Ward" options="{&quot;no_open&quot;: True}" class="oe_edit_only"/>
+            </xpath>
+
+            <xpath expr="//div[@name='div_address']/field[@name='state_id']" position="replace">
+                <field name="state_id" placeholder="Please choose a State"
+                       options="{'no_open': True, 'no_quick_create': True}"
+                       readonly="type != 'contact' and parent_id"
+                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                <field name="district_id" placeholder="Please choose a District" string="District" options="{&quot;no_open&quot;: True}" class="oe_edit_only"/>
+                <field name="ward_id" placeholder="Please choose a Ward" string="Ward" options="{&quot;no_open&quot;: True}" class="oe_edit_only"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
