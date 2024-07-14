@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form_inherit_delivery_ahamove" model="ir.ui.view">
+        <field name="name">view.picking.withcarrier.out.form.inherit.delivery.ahamove</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='promo_code']" position="before">
+                <field name="ahamove_service_request_domain" invisible="1"/>
+                <field name="ahamove_service_id"
+                       required="delivery_type == 'ahamove'"
+                       options="{'no_create_edit': True}"
+                       invisible="delivery_type != 'ahamove'"
+                />
+                <field name="ahamove_service_request_ids"
+                       widget="many2many_tags"
+                       domain="ahamove_service_request_domain"
+                       options="{'no_create_edit': True}"
+                       invisible="delivery_type != 'ahamove'"
+                />
+                <field name="ahamove_payment_method"
+                       invisible="delivery_type != 'ahamove'"
+                       required="delivery_type == 'ahamove'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

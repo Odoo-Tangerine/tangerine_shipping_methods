@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Base Vietnam Address',
-    'summary': """The Base Vietnam Address module is an extension for the Odoo system designed to provide a comprehensive database of addresses in Vietnam.""",
+    'name': 'Vietnam Address Base',
+    'summary': """The Vietnam Address Base module is an extension for the Odoo system designed to provide a comprehensive database of addresses in Vietnam.""",
     'author': 'Long Duong Nhat',
     'license': 'LGPL-3',
     'category': 'Hidden',

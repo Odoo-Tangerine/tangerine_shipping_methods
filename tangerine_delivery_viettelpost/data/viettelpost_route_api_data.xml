@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="viettelpost_get_short_term_token" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Get Short Term Token</field>
+            <field name="code">viettelpost_get_short_term_token</field>
+            <field name="route">/v2/user/Login</field>
+            <field name="method">POST</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_get_long_term_token" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Get Long Term Token</field>
+            <field name="code">viettelpost_get_long_term_token</field>
+            <field name="route">/v2/user/ownerconnect</field>
+            <field name="method">POST</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_service_sync" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Service Synchronous</field>
+            <field name="code">viettelpost_service_sync</field>
+            <field name="route">/v2/categories/listService</field>
+            <field name="method">POST</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_service_extend_sync" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Service Extend Synchronous</field>
+            <field name="code">viettelpost_service_extend_sync</field>
+            <field name="route">/v2/categories/listServiceExtra</field>
+            <field name="method">GET</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_get_matching_service" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Get Matching Service</field>
+            <field name="code">viettelpost_get_matching_service</field>
+            <field name="route">/v2/order/getPriceAllNlp</field>
+            <field name="method">POST</field>
+            <field name="is_need_access_token">True</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_estimate_cost" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Estimate Cost</field>
+            <field name="code">viettelpost_estimate_cost</field>
+            <field name="route">/v2/order/getPriceNlp</field>
+            <field name="method">POST</field>
+            <field name="is_need_access_token">True</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_create_order" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Create Order</field>
+            <field name="code">viettelpost_create_order</field>
+            <field name="route">/v2/order/createOrder</field>
+            <field name="method">POST</field>
+            <field name="is_need_access_token">True</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+
+        <record id="viettelpost_update_order" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Update Order</field>
+            <field name="code">viettelpost_update_order</field>
+            <field name="route">/v2/order/UpdateOrder</field>
+            <field name="method">POST</field>
+            <field name="is_need_access_token">True</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
+    </data>
+</odoo>

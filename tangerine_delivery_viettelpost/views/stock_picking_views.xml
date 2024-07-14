@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_picking_withcarrier_out_form_inherit_delivery_viettelpost" model="ir.ui.view">
+        <field name="name">view.picking.withcarrier.out.form.inherit.delivery.viettelpost</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='promo_code']" position="before">
+                <field name="viettelpost_order_payment"
+                       required="delivery_type == 'viettelpost'"
+                       invisible="delivery_type != 'viettelpost'"
+                />
+                <field name="viettelpost_product_type"
+                       required="delivery_type == 'viettelpost'"
+                       invisible="delivery_type != 'viettelpost'"
+                />
+                <field name="viettelpost_national_type"
+                       required="delivery_type == 'viettelpost'"
+                       invisible="delivery_type != 'viettelpost'"
+                />
+                <field name="viettelpost_service_id"
+                       required="delivery_type == 'viettelpost'"
+                       invisible="delivery_type != 'viettelpost'"
+                       domain="viettelpost_service_request_domain"
+                />
+                <field name="viettelpost_service_extend_id" invisible="delivery_type != 'viettelpost'"/>
+                <field name="viettelpost_service_request_domain" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
