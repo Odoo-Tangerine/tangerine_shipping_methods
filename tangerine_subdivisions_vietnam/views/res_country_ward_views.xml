@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_country_ward_tree_view" model="ir.ui.view">
+        <field name="name">res.country.ward.tree.view</field>
+        <field name="model">res.country.ward</field>
+        <field name="arch" type="xml">
+            <tree string="Ward" editable="top">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="slug"/>
+                <field name="type" />
+                <field name="district_id" options="{'no_open': True, 'no_create': True}"/>
+                <field name="state_id" />
+                <field name="country_id" options="{'no_open': True, 'no_create': True}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_country_ward_search_view" model="ir.ui.view">
+        <field name="name">res.country.ward.search.view</field>
+        <field name="model">res.country.ward</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="district_id"/>
+                <field name="state_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="res_country_ward_action" model="ir.actions.act_window">
+        <field name="name">Wards</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.country.ward</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('res_country_ward_tree_view')})]"
+        />
+        <field name="search_view_id" ref="res_country_ward_search_view"/>
+    </record>
+</odoo>

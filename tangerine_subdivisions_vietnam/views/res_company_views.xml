@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_company_form_view_inherit_by_tangerine" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state_id']" position="after">
+                <div>
+                    <field name="district_id" placeholder="Please choose a District" string="District" options="{&quot;no_open&quot;: True}" class="oe_edit_only"/>
+                    <field name="ward_id" placeholder="Please choose a Ward" string="Ward" options="{&quot;no_open&quot;: True}" class="oe_edit_only"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
