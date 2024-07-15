@@ -40,7 +40,7 @@ msgstr "API Ahamove sẽ cho phép người gửi hàng dễ dàng đặt, hủy
 "track the order via simple integration"
 
 #. module: tangerine_delivery_ahamove
-#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_res_country_state__ahamove_province_code
+#: model:ir.model.fields,field_description:tangerine_delivery_ahamove.field_res_country_state__ahamove_city_code
 msgid "Ahamove Code"
 msgstr ""
 

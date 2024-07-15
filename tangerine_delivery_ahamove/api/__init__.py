@@ -1,1 +1,1 @@
-from . import connection, client
+from . import client

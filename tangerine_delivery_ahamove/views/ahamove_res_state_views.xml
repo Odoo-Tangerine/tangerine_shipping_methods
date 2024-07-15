@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base.view_country_state_tree"/>
         <field name="arch" type="xml">
             <field name="code" position="after">
-                <field name="ahamove_province_code"/>
+                <field name="ahamove_city_code"/>
             </field>
         </field>
     </record>

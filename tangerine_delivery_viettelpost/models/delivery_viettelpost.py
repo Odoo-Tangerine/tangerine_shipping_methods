@@ -100,10 +100,10 @@ class ProviderViettelpost(models.Model):
             'ORDER_NOTE': picking.remarks or '',
             'NATIONAL_TYPE': picking.viettelpost_national_type,
             'SENDER_FULLNAME': sender_id.name,
-            'SENDER_PHONE': sender_id.mobile or sender_id.phone,
+            'SENDER_PHONE': standardization_e164(sender_id.mobile or sender_id.phone),
             'SENDER_ADDRESS': f'{sender_id.shipping_address}',
             'RECEIVER_FULLNAME': recipient_id.name,
-            'RECEIVER_PHONE': recipient_id.mobile or recipient_id.phone,
+            'RECEIVER_PHONE': standardization_e164(recipient_id.mobile or recipient_id.phone),
             'RECEIVER_ADDRESS': f'{recipient_id.shipping_address}',
             'PRODUCT_WEIGHT': math.ceil(self.convert_weight(
                 picking._get_estimated_weight(),
@@ -159,6 +159,26 @@ class ProviderViettelpost(models.Model):
             'success',
             f'Cancel tracking reference {settings.update_order_route.value} successfully'
         )
+
+    @staticmethod
+    def _viettelpost_payload_print_order(order):
+        return {'TYPE': 1, 'ORDER_ARRAY': [order]}
+
+    def _format_url_print_order(self, token):
+        page_print = self.env.context.get('page_print')
+        if page_print == 'a5':
+            url = settings.url_print_a5.value.format(token)
+        elif page_print == 'a6':
+            url = settings.url_print_a6.value.format(token)
+        elif page_print == 'a7':
+            url = settings.url_print_a7.value.format(token)
+        else:
+            raise UserError(_('Print type not found.'))
+        return url
+
+    def viettelpost_print_order(self, order):
+        client = Client(Connection(self, get_route_api(self, settings.viettelpost_print_order_route.value)))
+        return self._format_url_print_order(client.print_order(self._viettelpost_payload_print_order(order)))
 
     def viettelpost_toggle_prod_environment(self):
         self.ensure_one()

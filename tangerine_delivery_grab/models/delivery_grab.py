@@ -83,13 +83,13 @@ class ProviderGrab(models.Model):
 
     @staticmethod
     def _grab_building_address(address, city_code):
-        street, ward, district, province = address.split(',')
+        address_list = address.split(',')
         return {
             'address': address,
             'cityCode': city_code,
-            'address_L3': ward,
-            'address_L2': district,
-            'address_L1': province,
+            'address_L3': address_list[-3],
+            'address_L2': address_list[-2],
+            'address_L1': address_list[-1],
             'coordinates': {}
         }
 

@@ -1,11 +1,5 @@
-from markupsafe import Markup
-from odoo import models, fields, api, _
-from odoo.tools import ustr
-from odoo.exceptions import UserError
-from odoo.addons.tangerine_delivery_base.settings import utils
+from odoo import models, fields, api
 from ..settings.constants import settings
-from ..api.client import Client
-from ..api.connection import Connection
 
 
 class StockPicking(models.Model):
@@ -16,7 +10,6 @@ class StockPicking(models.Model):
                                                    'picking_id', 'request_id', string='Request Type')
     ahamove_service_request_domain = fields.Binary(default=[], store=False)
     ahamove_payment_method = fields.Selection(selection=settings.payment_method.value, string='Payment Method')
-
     ahamove_shared_link = fields.Char(string='Shared Link')
 
     @api.onchange('ahamove_service_id')

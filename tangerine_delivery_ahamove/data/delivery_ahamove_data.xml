@@ -23,13 +23,10 @@
             <field name="product_id" ref="tangerine_delivery_ahamove.product_product_delivery_ahamove"/>
             <field name="is_locally_delivery" eval="True"/>
             <field name="base_weight_unit">G</field>
-            <field name="webhook_route">/api/v1/webhook/ahamove</field>
-            <field name="webhook_method">POST</field>
-            <field name="webhook_header">'{"Content-Type": "application/json"}'</field>
             <field name="carrier_description">Ahamove APIs will allow shipper to easily place, cancel, get quotes and track the order via simple integration</field>
         </record>
 
-        <function model="delivery.carrier" name="set_webhook_domain">
+        <function model="delivery.carrier" name="set_webhook_url">
             <value eval="[ref('tangerine_delivery_ahamove_provider')]"/>
         </function>
     </data>

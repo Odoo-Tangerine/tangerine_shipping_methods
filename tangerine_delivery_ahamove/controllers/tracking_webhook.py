@@ -1,19 +1,24 @@
+import logging
 from odoo.tools import ustr
 from odoo.http import request, Controller, route
 from odoo.addons.tangerine_delivery_base.settings.utils import authentication, response
 from odoo.addons.tangerine_delivery_base.settings.status import status
 
+_logger = logging.getLogger(__name__)
+
 
 class DeliveriesController(Controller):
     @authentication
-    @route('/api/v1/webhook/ahamove', type='json', auth='public', methods=['POST'])
+    @route('/webhook/v1/delivery/ahamove', type='json', auth='public', methods=['POST'])
     def ahamove_callback(self):
         try:
             body = request.dispatcher.jsonrequest
+            _logger.info(f'WEBHOOK AHAMOVE START - BODY: {body}')
             picking_id = request.env['stock.picking'].sudo().search([
                 ('carrier_tracking_ref', '=', body.get('_id'))
             ])
             if not picking_id:
+                _logger.error(f'WEBHOOK AHAMOVE ERROR: The delivery id {body.get("_id")} not found.')
                 return response(
                     status=status.HTTP_400_BAD_REQUEST.value,
                     message=f'The delivery id {body.get("_id")} not found.'
@@ -23,16 +28,25 @@ class DeliveriesController(Controller):
                 ('provider_id', '=', picking_id.carrier_id.id)
             ])
             if not status_id:
+                _logger.error(f'WEBHOOK AHAMOVE ERROR: The status {body.get("status")} invalid.')
                 return response(
                     status=status.HTTP_400_BAD_REQUEST.value,
-                    message=f'The status {body.get("status")} does not match partner system.'
+                    message=f'The status {body.get("status")} invalid.'
                 )
-            payload = {'status_id': status_id.id}
+            payload = {'delivery_status_id': status_id.id}
+            if not picking_id.ahamove_shared_link:
+                payload.update({'ahamove_shared_link': body.get('shared_link')})
             if body.get('driver'):
                 payload.update({
                     'driver_name': body.get('supplier_name'),
                     'driver_phone': body.get('supplier_id')
                 })
             picking_id.sudo().write(payload)
+            _logger.info(f'WEBHOOK AHAMOVE SUCCESS: Receive order callback {body.get("_id")} successfully.')
+            return response(
+                status=status.HTTP_200_OK.value,
+                message=f'Receive order callback {body.get("_id")} successfully.'
+            )
         except Exception as e:
+            _logger.exception(f'WEBHOOK AHAMOVE EXCEPTION: {ustr(e)}')
             return response(status=status.HTTP_500_INTERNAL_SERVER_ERROR.value, message=ustr(e))

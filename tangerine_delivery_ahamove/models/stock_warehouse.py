@@ -1,9 +1,9 @@
 from odoo import fields, models, _
 from odoo.exceptions import UserError
 from odoo.tools import ustr
-from odoo.addons.tangerine_delivery_base.settings import utils
+from odoo.addons.tangerine_delivery_base.settings.utils import get_route_api
 from ..settings.constants import settings
-from ..api.connection import Connection
+from odoo.addons.tangerine_delivery_base.api.connection import Connection
 from ..api.client import Client
 
 
@@ -12,17 +12,26 @@ class Warehouse(models.Model):
 
     ahamove_service_ids = fields.One2many('ahamove.service', 'warehouse_id', string='Services')
 
+    @staticmethod
+    def _ahamove_param_service_synchronous(provider_id, city_id):
+        return {
+            'token': provider_id.access_token,
+            'user_mobile': provider_id.ahamove_partner_phone,
+            'city_id': city_id
+        }
+
     def ahamove_service_sync(self):
         try:
             for warehouse in self:
-                if not warehouse.partner_id.state_id.ahamove_province_code:
+                if not warehouse.partner_id.state_id.ahamove_city_code:
                     raise UserError(_('The address of warehouse not set ahamove code. Please mapping ahamove code'))
                 provider_id = warehouse.env['delivery.carrier'].search([
                     ('delivery_type', '=', settings.ahamove_code.value)
                 ])
-                client = Client(Connection(provider_id))
-                route_id = utils.get_route_api(provider_id, settings.service_sync_route_code.value)
-                result = client.ahamove_service_synchronous(route_id, warehouse.partner_id.state_id.ahamove_province_code)
+                client = Client(Connection(provider_id, get_route_api(provider_id, settings.service_sync_route_code.value)))
+                result = client.ahamove_service_synchronous(
+                    self._ahamove_param_service_synchronous(provider_id, warehouse.partner_id.state_id.ahamove_city_code)
+                )
                 payload_service = []
                 for service in result:
                     service_id = warehouse.env['ahamove.service'].search([
@@ -37,11 +46,17 @@ class Warehouse(models.Model):
                             ])
                             if not request_id:
                                 payload_service_request.append(
-                                    (0, 0, {'name': request.get('name'), 'code': request.get('_id')})
+                                    (0, 0, {
+                                        'name': request.get('name'),
+                                        'code': request.get('_id'),
+                                        'type_of_request': request.get('group_id')
+                                    })
                                 )
                             else:
                                 warehouse.env['ahamove.service.request'].write({
-                                    'name': request.get('name'), 'code': request.get('_id')
+                                    'name': request.get('name'),
+                                    'code': request.get('_id'),
+                                    'type_of_request': request.get('group_id')
                                 })
                         payload_service.append({
                             'name': service.get('name'),

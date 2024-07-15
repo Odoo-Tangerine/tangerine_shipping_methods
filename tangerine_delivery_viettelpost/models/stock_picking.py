@@ -27,3 +27,13 @@ class StockPicking(models.Model):
         for rec in self:
             if rec.viettelpost_service_id:
                 rec.viettelpost_service_request_domain = [('service_id', '=', rec.viettelpost_service_id.id)]
+
+    def action_print_order_viettelpost(self):
+        self.ensure_one()
+        if self.delivery_type == settings.code.value:
+            url = self.carrier_id.viettelpost_print_order(self.carrier_tracking_ref)
+            return {
+                'type': 'ir.actions.act_url',
+                'url': url,
+                'close': True
+            }

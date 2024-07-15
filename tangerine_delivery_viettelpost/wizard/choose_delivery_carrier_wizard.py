@@ -29,19 +29,14 @@ class ChooseDeliveryCarrier(models.TransientModel):
             if rec.viettelpost_service_id:
                 rec.viettelpost_service_request_domain = [('service_id', '=', rec.viettelpost_service_id.id)]
 
-    def _validate_payload_shipment_rate_viettelpost(self):
-        if not self.viettelpost_service_id:
-            raise UserError(_('The field Service is required.'))
-
     def _get_shipment_rate(self):
         if self.carrier_id.delivery_type == settings.code.value:
-            self._validate_payload_shipment_rate_viettelpost()
             context = dict(self.env.context)
             context.update({
-                'viettelpost_service_code': self.viettelpost_service_id.code,
+                'viettelpost_service_code': self.viettelpost_service_id.code or self.carrier_id.default_viettelpost_service_id.code or settings.default_service_type.value,
                 'viettelpost_service_extend_code': self.viettelpost_service_extend_id.code or None,
-                'viettelpost_national_type': self.viettelpost_national_type,
-                'viettelpost_product_type': self.viettelpost_product_type
+                'viettelpost_national_type': self.viettelpost_national_type or self.carrier_id.default_viettelpost_national_type or settings.default_national_type.value,
+                'viettelpost_product_type': self.viettelpost_product_type or self.carrier_id.default_viettelpost_product_type or settings.default_product_type.value,
             })
             self.env.context = context
         return super(ChooseDeliveryCarrier, self)._get_shipment_rate()

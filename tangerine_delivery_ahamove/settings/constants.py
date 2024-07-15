@@ -20,10 +20,12 @@ class settings(Enum):
     payment_method: Final[list[tuple[str, str]]] = [
         ('BALANCE', 'BALANCE'),
         ('CASH', 'CASH'),
-        ('CASH_BY_RECIPIENT', 'CASH BY RECIPIENT')
     ]
     default_payment_method: Final[str] = 'BALANCE'
 
+    request_group_bulky: Final[str] = 'BULKY'
+    request_group_tip: Final[str] = 'TIP'
+    default_tier: Final[str] = 'TIER_1'
     list_status_cancellation_allowed: Final[str] = ['ASSIGNING', 'ACCEPTED', 'CONFIRMING', 'PAYING', 'IDLE']
     status_completed: Final[str] = 'COMPLETED'
     cancel_reason: Final[str] = 'Merchant asks for order cancellation'
