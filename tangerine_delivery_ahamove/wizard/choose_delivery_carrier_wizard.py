@@ -36,7 +36,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
             context = dict(self.env.context)
             context.update({
                 'ahamove_service': self.ahamove_service_id.code,
-                'ahamove_request': [rec.code for rec in self.ahamove_service_request_ids],
+                'ahamove_service_request_ids': self.ahamove_service_request_ids,
                 'promo_code': self.promo_code
             })
             self.env.context = context

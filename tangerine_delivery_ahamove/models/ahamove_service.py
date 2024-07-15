@@ -30,6 +30,7 @@ class AhamoveServiceRequest(models.Model):
     name = fields.Char(string='Name', required=True, readonly=True)
     code = fields.Char(string='Code', required=True, readonly=True)
     description = fields.Char(string='Description')
+    type_of_request = fields.Char(string='Type of Request')
 
     @api.depends('code', 'name')
     def _compute_display_name(self):

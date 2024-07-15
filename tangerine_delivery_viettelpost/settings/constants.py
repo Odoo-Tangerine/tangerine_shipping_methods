@@ -17,6 +17,11 @@ class settings(Enum):
     estimate_cost_route: Final[str] = 'viettelpost_estimate_cost'
     create_order_route: Final[str] = 'viettelpost_create_order'
     update_order_route: Final[str] = 'viettelpost_update_order'
+    viettelpost_print_order_route: Final[str] = 'viettelpost_print_order'
+
+    url_print_a5: Final[str] = 'https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=1&bill={}&showPostage=1'
+    url_print_a6: Final[str] = 'https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=2&bill={}&showPostage=1'
+    url_print_a7: Final[str] = 'https://digitalize.viettelpost.vn/DigitalizePrint/report.do?type=1001&bill={}&showPostage=1'
 
     product_type: Final[list[tuple[str, str]]] = [
         ('TH', 'Letter'),
@@ -37,6 +42,7 @@ class settings(Enum):
         ('4', 'Collect money for delivery')
     ]
     default_order_payment: Final[str] = '1'
+    default_service_type: Final[str] = 'VCN'
 
     list_status_cancellation_allowed: Final[str] = ['IN_DELIVERY', 'FAILED', 'CANCELED', 'COMPLETED']
     status_completed: Final[str] = 'COMPLETED'

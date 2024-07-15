@@ -20,10 +20,11 @@ class Client:
             headers.update({'Token': self.conn.provider.access_token})
         return headers
 
-    @staticmethod
-    def _validate_response(response):
+    def _validate_response(self, response):
         if response.get('error'):
             raise UserError(response.get('message'))
+        if self.conn.endpoint.code == settings.viettelpost_print_order_route.value:
+            return response.get('message')
         return response.get('data')
 
     def _execute(self, params=None, payload=None, token=None):
@@ -58,3 +59,6 @@ class Client:
 
     def cancel_order(self, payload):
         self._execute(payload=payload)
+
+    def print_order(self, payload):
+        return self._validate_response(self._execute(payload=payload))

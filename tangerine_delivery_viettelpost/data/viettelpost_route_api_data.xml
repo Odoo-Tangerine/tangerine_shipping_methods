@@ -76,5 +76,15 @@
             <field name="is_need_access_token">True</field>
             <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
         </record>
+
+        <record id="viettelpost_print_order" model="delivery.route.api">
+            <field name="provider_id" ref="tangerine_delivery_viettelpost.tangerine_delivery_viettelpost_provider" />
+            <field name="name">Print Order</field>
+            <field name="code">viettelpost_print_order</field>
+            <field name="route">/v2/order/printing-code</field>
+            <field name="method">POST</field>
+            <field name="is_need_access_token">True</field>
+            <field name="headers">'{"Cache-Control": "no-cache", "Content-Type": "application/json"}'</field>
+        </record>
     </data>
 </odoo>

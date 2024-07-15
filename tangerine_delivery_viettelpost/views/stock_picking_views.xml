@@ -5,6 +5,26 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button type="object"
+                        name="action_print_order_viettelpost"
+                        context="{'page_print': 'a5'}"
+                        string="Print A5"
+                        invisible="not carrier_tracking_ref or delivery_type != 'viettelpost'"
+                />
+                <button type="object"
+                        name="action_print_order_viettelpost"
+                        context="{'page_print': 'a6'}"
+                        string="Print A6"
+                        invisible="not carrier_tracking_ref or delivery_type != 'viettelpost'"
+                />
+                <button type="object"
+                        name="action_print_order_viettelpost"
+                        context="{'page_print': 'a7'}"
+                        string="Print A7"
+                        invisible="not carrier_tracking_ref or delivery_type != 'viettelpost'"
+                />
+            </xpath>
             <xpath expr="//field[@name='promo_code']" position="before">
                 <field name="viettelpost_order_payment"
                        required="delivery_type == 'viettelpost'"

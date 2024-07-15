@@ -33,10 +33,9 @@ class DeliveriesController(Controller):
                     status=status.HTTP_400_BAD_REQUEST.value,
                     message=f'The status {body.get("status")} invalid.'
                 )
-            payload = {
-                'delivery_status_id': status_id.id,
-                'grab_tracking_link': body.get('trackURL')
-            }
+            payload = {'delivery_status_id': status_id.id}
+            if not picking_id.grab_tracking_link:
+                payload.update({'grab_tracking_link': body.get('trackURL')})
             if body.get('driver'):
                 payload.update({
                     'driver_name': body.get('driver').get('name'),
