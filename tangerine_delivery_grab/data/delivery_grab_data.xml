@@ -24,6 +24,7 @@
             <field name="domain">https://partner-api.grab.com</field>
             <field name="product_id" ref="tangerine_delivery_grab.product_product_delivery_grab"/>
             <field name="is_locally_delivery" eval="True"/>
+            <field name="is_support_multi_stop_delivery" eval="True"/>
             <field name="base_weight_unit">G</field>
             <field name="default_grab_payer">SENDER</field>
             <field name="default_grab_service_type">INSTANT</field>

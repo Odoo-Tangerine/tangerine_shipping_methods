@@ -4,7 +4,7 @@ import math
 import threading
 from datetime import datetime, timedelta
 from odoo import fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools import ustr
 from odoo.addons.tangerine_delivery_base.settings.utils import (
     datetime_to_rfc3339,
@@ -93,6 +93,36 @@ class ProviderGrab(models.Model):
             'coordinates': {}
         }
 
+    def _grab_get_packages(self, line_ids):
+        packages = []
+        for line in line_ids:
+            if hasattr(line, 'quantity'):
+                packages.append({
+                    'name': line.name,
+                    'description': line.name,
+                    'quantity': int(line.quantity) if hasattr(line, 'quantity') else int(line.product_uom_qty),
+                    'dimensions': {
+                        'height': 0,
+                        'width': 0,
+                        'depth': 0,
+                        'weight': math.ceil(self.convert_weight(line.product_id.weight, self.base_weight_unit))
+                    }
+                })
+            else:
+                if not line.is_delivery:
+                    packages.append({
+                        'name': line.name,
+                        'description': line.name,
+                        'quantity': int(line.quantity) if hasattr(line, 'quantity') else int(line.product_uom_qty),
+                        'dimensions': {
+                            'height': 0,
+                            'width': 0,
+                            'depth': 0,
+                            'weight': math.ceil(self.convert_weight(line.product_id.weight, self.base_weight_unit))
+                        }
+                    })
+        return packages
+
     def _grab_payload_delivery_quotes(self, order):
         payload = {
             'origin': self._grab_building_address(
@@ -103,18 +133,7 @@ class ProviderGrab(models.Model):
                 address=order.partner_shipping_id.shipping_address,
                 city_code=order.partner_shipping_id.state_id.grab_city_code
             ),
-            'packages': [{
-                'name': line.product_id.name,
-                'description': line.name,
-                'quantity': int(line.product_uom_qty),
-                'price': int(line.price_subtotal),
-                'dimensions': {
-                    'height': 0,
-                    'width': 0,
-                    'depth': 0,
-                    'weight': math.ceil(self.convert_weight(line.product_id.weight, self.base_weight_unit))
-                }
-            } for line in order.order_line if not line.is_delivery]
+            'packages': self._grab_get_packages(order.order_line)
         }
         if order.env.context.get('grab_service_type'):
             payload.update({'serviceType': order.env.context.get('grab_service_type')})
@@ -131,6 +150,17 @@ class ProviderGrab(models.Model):
             'error_message': False,
             'warning_message': False
         }
+
+    @staticmethod
+    def _validate_address(partner_id):
+        if not partner_id.state_id:
+            raise ValidationError(_(f'The state of partner: {partner_id.name} is required'))
+        elif not partner_id.district_id:
+            raise ValidationError(_(f'The district of partner: {partner_id.name} is required'))
+        elif not partner_id.ward_id:
+            raise ValidationError(_(f'The ward of partner: {partner_id.name} is required'))
+        elif not partner_id.street:
+            raise ValidationError(_(f'The street of partner: {partner_id.name} is required'))
 
     @staticmethod
     def _validate_picking(picking):
@@ -159,17 +189,7 @@ class ProviderGrab(models.Model):
             'paymentMethod': picking.grab_payment_method,
             'payer': picking.grab_payer,
             'highValue': picking.grab_high_value,
-            'packages': [{
-                'name': line.name,
-                'description': line.name,
-                'quantity': int(line.quantity),
-                'dimensions': {
-                    'height': 0,
-                    'width': 0,
-                    'depth': 0,
-                    'weight': math.ceil(self.convert_weight(line.product_id.weight, self.base_weight_unit))
-                }
-            } for line in picking.move_ids_without_package],
+            'packages': self._grab_get_packages(picking.move_ids_without_package),
             'sender': {
                 'firstName': picking.picking_type_id.warehouse_id.partner_id.name,
                 'phone': standardization_e164(
@@ -203,6 +223,9 @@ class ProviderGrab(models.Model):
     def grab_send_shipping(self, pickings):
         client = Client(Connection(self, get_route_api(self, settings.create_request_route_code.value)))
         for picking in pickings:
+            if picking.delivery_status_id.code in settings.list_status_booking_blocked.value:
+                raise UserError(
+                    _(f'The sale order has been booking for delivery.\nGrab Shipment: {picking.carrier_tracking_ref} - Status: {picking.delivery_status_id.name}'))
             result = client.create_delivery_request(self._grab_payload_create_delivery_request(picking))
             status_id = self.env.ref('tangerine_delivery_grab.grab_status_queueing') if picking.schedule_order else self.env.ref('tangerine_delivery_grab.grab_status_allocating')
             picking.write({'delivery_status_id': status_id.id if status_id else False})
@@ -221,7 +244,7 @@ class ProviderGrab(models.Model):
             raise UserError(_(f'You cannot cancel while the order is in {picking.delivery_status_id.name} status'))
         client = Client(Connection(self, get_route_api(self, settings.cancel_request_route_code.value)))
         client.cancel_delivery(picking.carrier_tracking_ref)
-        picking.write({'carrier_tracking_ref': False, 'carrier_price': 0.0})
+        picking.write({'carrier_tracking_ref': False, 'carrier_price': 0.0, 'delivery_status_id': False})
         return notification('success', f'Cancel tracking reference {picking.carrier_tracking_ref} successfully')
 
     def grab_toggle_prod_environment(self):
@@ -236,4 +259,3 @@ class ProviderGrab(models.Model):
             self.write({'route_api_ids': data})
 
     def _grab_get_default_custom_package_code(self):...
-
