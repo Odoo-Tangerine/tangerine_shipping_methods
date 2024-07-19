@@ -24,6 +24,7 @@ class CarrierRefOrder(models.Model):
         related='picking_id.schedule_pickup_time_to',
         string='Pickup Time To'
     )
+    delivery_charge = fields.Float(related='picking_id.carrier_price')
 
     driver_name = fields.Char(related='picking_id.driver_name', string='Driver Name')
     driver_phone = fields.Char(related='picking_id.driver_phone', string='Driver Phone')
