@@ -18,6 +18,7 @@
                             <field name="picking_id"/>
                             <field name="sale_id"/>
                             <field name="carrier_id"/>
+                            <field name="delivery_charge"/>
                             <field name="delivery_status_id"/>
                             <field name="promo_code"/>
                             <label for="cash_on_delivery"/>
@@ -65,6 +66,7 @@
                 <field name="sale_id"/>
                 <field name="carrier_id"/>
                 <field name="carrier_tracking_ref"/>
+                <field name="delivery_charge"/>
                 <field name="cash_on_delivery"/>
                 <field name="delivery_status_id" widget="badge"/>
             </tree>

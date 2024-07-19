@@ -188,7 +188,8 @@ class ProviderAhamove(models.Model):
         client.cancel_order(self._ahamove_param_cancel_shipment(picking.carrier_tracking_ref))
         picking.write({
             'carrier_tracking_ref': False,
-            'carrier_price': 0.0
+            'carrier_price': 0.0,
+            'delivery_status_id': False
         })
         return notification(
             'success',
