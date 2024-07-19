@@ -17,3 +17,4 @@ class District(models.Model):
         ('2', 'Thị xã'),
         ('3', 'Thành Phố')
     ], string='Type')
+    ward_ids = fields.One2many('res.country.ward', 'district_id')

@@ -12,3 +12,4 @@ class CountryState(models.Model):
                 record.code_ext = record.code
 
     code_ext = fields.Char(string='State Code', required=True, compute=_make_code_ext, store=True)
+    district_ids = fields.One2many('res.country.district', 'state_id')
