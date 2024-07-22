@@ -33,6 +33,7 @@ class ProviderViettelpost(models.Model):
     viettelpost_service_request_domain = fields.Binary(default=[], store=False)
     default_viettelpost_service_id = fields.Many2one('viettelpost.service', string='Service')
     default_viettelpost_service_extend_id = fields.Many2one('viettelpost.service.extend', string='Service Extend')
+    default_print_order_paper = fields.Selection(settings.paper_print.value, string='Print Order Paper')
 
     def _payload_get_token(self):
         return {
@@ -142,7 +143,7 @@ class ProviderViettelpost(models.Model):
 
     @staticmethod
     def viettelpost_get_tracking_link(picking):
-        return f'{settings.tracking_url.value}'
+        return f'{settings.tracking_url.value}{picking.carrier_tracking_ref}'
 
     @staticmethod
     def _viettelpost_payload_cancel_order(order):
@@ -153,7 +154,8 @@ class ProviderViettelpost(models.Model):
         client.cancel_order(self._viettelpost_payload_cancel_order(picking.carrier_tracking_ref))
         picking.write({
             'carrier_tracking_ref': False,
-            'carrier_price': 0.0
+            'carrier_price': 0.0,
+            'delivery_status_id': False
         })
         return notification(
             'success',
@@ -164,21 +166,21 @@ class ProviderViettelpost(models.Model):
     def _viettelpost_payload_print_order(order):
         return {'TYPE': 1, 'ORDER_ARRAY': [order]}
 
-    def _format_url_print_order(self, token):
-        page_print = self.env.context.get('page_print')
-        if page_print == 'a5':
+    @staticmethod
+    def _format_url_print_order(token, paper_type):
+        if paper_type == 'a5':
             url = settings.url_print_a5.value.format(token)
-        elif page_print == 'a6':
+        elif paper_type == 'a6':
             url = settings.url_print_a6.value.format(token)
-        elif page_print == 'a7':
+        elif paper_type == 'a7':
             url = settings.url_print_a7.value.format(token)
         else:
             raise UserError(_('Print type not found.'))
         return url
 
-    def viettelpost_print_order(self, order):
+    def viettelpost_print_order(self, order, paper_type):
         client = Client(Connection(self, get_route_api(self, settings.viettelpost_print_order_route.value)))
-        return self._format_url_print_order(client.print_order(self._viettelpost_payload_print_order(order)))
+        return self._format_url_print_order(client.print_order(self._viettelpost_payload_print_order(order)), paper_type)
 
     def viettelpost_toggle_prod_environment(self):
         self.ensure_one()

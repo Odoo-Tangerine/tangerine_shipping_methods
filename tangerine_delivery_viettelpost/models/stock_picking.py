@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 from ..settings.constants import settings
 
 
@@ -22,6 +22,17 @@ class StockPicking(models.Model):
                 rec.viettelpost_service_id = rec.carrier_id.default_viettelpost_service_id
                 rec.viettelpost_service_extend_id = rec.carrier_id.default_viettelpost_service_extend_id
 
+    @api.onchange('viettelpost_order_payment')
+    def _onchange_viettelpost_order_payment(self):
+        for rec in self:
+            if rec.viettelpost_order_payment and rec.delivery_type == settings.code.value:
+                if rec.viettelpost_order_payment == settings.order_payment_no_collection.value:
+                    rec.cash_on_delivery = False
+                    rec.cash_on_delivery_amount = 0.0
+                else:
+                    rec.cash_on_delivery = True
+                    rec.cash_on_delivery_amount = rec.sale_id.amount_total
+
     @api.onchange('viettelpost_service_id')
     def _onchange_viettelpost_service_id(self):
         for rec in self:
@@ -31,9 +42,25 @@ class StockPicking(models.Model):
     def action_print_order_viettelpost(self):
         self.ensure_one()
         if self.delivery_type == settings.code.value:
-            url = self.carrier_id.viettelpost_print_order(self.carrier_tracking_ref)
-            return {
-                'type': 'ir.actions.act_url',
-                'url': url,
-                'close': True
-            }
+            if not self.carrier_id.default_print_order_paper:
+                return {
+                    'name': _('Print Order Viettelpost Wizard'),
+                    'view_mode': 'form',
+                    'res_model': 'viettelpost.print.order.wizard',
+                    'view_id': self.env.ref('tangerine_delivery_viettelpost.print_order_wizard_form_view').id,
+                    'type': 'ir.actions.act_window',
+                    'context': {
+                        'default_picking_id': self.id
+                    },
+                    'target': 'new'
+                }
+            else:
+                url = self.carrier_id.viettelpost_print_order(
+                    self.carrier_tracking_ref,
+                    self.carrier_id.default_print_order_paper
+                )
+                return {
+                    'type': 'ir.actions.act_url',
+                    'url': url,
+                    'close': True
+                }

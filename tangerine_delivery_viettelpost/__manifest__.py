@@ -15,10 +15,12 @@
         'data/res_partner_data.xml',
         'data/ir_cron.xml',
         'wizard/choose_delivery_carrier_wizard_views.xml',
+        'wizard/print_order_wizard_views.xml',
         'views/delivery_viettelpost_views.xml',
         'views/stock_picking_views.xml',
         'views/viettelpost_service_views.xml',
         'views/viettelpost_service_extend_views.xml',
+        'views/carrier_ref_order_views.xml'
     ],
     'post_init_hook': '_generate_master_data',
     'images': ['static/description/thumbnail.png'],

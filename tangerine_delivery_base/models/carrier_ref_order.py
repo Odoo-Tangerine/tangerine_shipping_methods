@@ -4,6 +4,7 @@ from odoo import fields, models
 class CarrierRefOrder(models.Model):
     _name = 'carrier.ref.order'
     _rec_name = 'carrier_tracking_ref'
+    _order = 'create_date desc'
     _description = 'Carrier Ref Order'
 
     picking_id = fields.Many2one('stock.picking', string='Picking', required=True, readonly=True)
