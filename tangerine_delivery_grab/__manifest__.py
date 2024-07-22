@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Grab Express Shipping',
-    'summary': """GrabExpress Shipping Integration will allow Odooers to easily place, cancel, get quotes, and track the order via simple integration.""",
+    'name': 'Grab Express Integration',
+    'summary': """Grab Express Integration will allow Odooers to easily place, cancel, get quotes, and track the order via simple integration.""",
     'author': 'Long Duong Nhat',
     'category': 'Inventory/Delivery',
     'support': 'odoo.tangerine@gmail.com',
