@@ -18,9 +18,6 @@
                             <field name="picking_id"/>
                             <field name="sale_id"/>
                             <field name="carrier_id"/>
-                            <field name="delivery_charge"/>
-                            <field name="delivery_status_id"/>
-                            <field name="promo_code"/>
                             <label for="cash_on_delivery"/>
                             <div class="o_row">
                                 <field name="cash_on_delivery" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
@@ -28,8 +25,11 @@
                             </div>
                         </group>
                         <group>
-                            <label for="schedule_order"/>
-                            <div class="o_row">
+                            <field name="delivery_charge"/>
+                            <field name="delivery_status_id"/>
+                            <field name="promo_code"/>
+                            <label for="schedule_order" name="o_label_schedule_order"/>
+                            <div class="o_row" name="o_schedule_order">
                                 <field name="schedule_order" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
                                 <strong invisible="not schedule_order">From:</strong>
                                 <field name="schedule_pickup_time_from"
@@ -48,7 +48,7 @@
                             <field name="currency_id" invisible="1"/>
                         </group>
                     </group>
-                    <group string="Driver Information">
+                    <group string="Driver Information" name="delivery_driver_data">
                         <field name="driver_name" string="Name"/>
                         <field name="driver_phone" string="Phone" widget="phone"/>
                     </group>

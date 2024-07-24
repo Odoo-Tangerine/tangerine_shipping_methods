@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Ahamove Shipping',
-    'summary': """Delivering the perfect solution for all your shipping needs with groundbreaking technology — all in a single app Ahamove Shipping Integration.""",
+    'name': 'Ahamove Integration',
+    'summary': """Delivering the perfect solution for all your shipping needs with groundbreaking technology — all in a single app Ahamove Integration.""",
     'author': 'Long Duong Nhat',
     'category': 'Inventory/Delivery',
     'support': 'odoo.tangerine@gmail.com',
@@ -28,5 +28,5 @@
     'auto_install': False,
     'application': True,
     'currency': 'USD',
-    'price': 68.00
+    'price': 119.00
 }

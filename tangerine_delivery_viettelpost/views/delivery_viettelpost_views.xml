@@ -14,6 +14,7 @@
                 <field name="default_viettelpost_order_payment" invisible="delivery_type != 'viettelpost'"/>
                 <field name="default_viettelpost_product_type" invisible="delivery_type != 'viettelpost'"/>
                 <field name="default_viettelpost_national_type" invisible="delivery_type != 'viettelpost'"/>
+                <field name="default_print_order_paper" invisible="delivery_type != 'viettelpost'"/>
                 <field name="default_viettelpost_service_id"
                        invisible="delivery_type != 'viettelpost'"
                        domain="viettelpost_service_request_domain"

@@ -13,7 +13,8 @@
                 <button name="%(carrier_ref_order_action)d"
                         type="action"
                         context="{'search_default_picking_id': id}"
-                        class="oi oi-search oe_link"
+                        class="oi oi-search oe_link btn_view_detail_order"
+                        string="View"
                         invisible="not carrier_tracking_ref"
                 />
             </field>
@@ -25,8 +26,8 @@
                         <field name="cash_on_delivery_amount" readonly="carrier_tracking_ref" invisible="not cash_on_delivery"/>
                     </div>
                     <field name="promo_code" readonly="carrier_tracking_ref"/>
-                    <label for="schedule_order"/>
-                    <div class="o_row">
+                    <label for="schedule_order" name="o_label_schedule_order"/>
+                    <div class="o_row" name="o_schedule_order">
                         <field name="schedule_order" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
                         <strong invisible="not schedule_order">From:</strong>
                         <field name="schedule_pickup_time_from"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="carrier_ref_order_form_view_inherit_viettelpost" model="ir.ui.view">
+        <field name="name">carrier.ref.order.form.view.inherit.viettelpost</field>
+        <field name="model">carrier.ref.order</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.carrier_ref_order_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@name='o_label_schedule_order']" position="attributes">
+                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+            </xpath>
+            <xpath expr="//div[@name='o_schedule_order']" position="attributes">
+                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+            </xpath>
+            <xpath expr="//group[@name='delivery_driver_data']" position="attributes">
+                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
