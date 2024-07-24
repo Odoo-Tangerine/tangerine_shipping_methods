@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Shipping Methods Base',
-    'summary': """The Shipping Methods Base is a helper module. This module handles Restful APIs between the Odoo system and third-party service carriers, dynamic configuration of API endpoints on the UI, etc.""",
+    'summary': """This module handles Restful APIs between the Odoo system and third-party service carriers.""",
     'author': 'Long Duong Nhat',
     'license': 'LGPL-3',
     'category': 'Inventory/Delivery',
