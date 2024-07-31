@@ -9,7 +9,9 @@
                 <field name="viettelpost_username" invisible="delivery_type != 'viettelpost'"/>
                 <field name="viettelpost_password" password="1" invisible="delivery_type != 'viettelpost'"/>
             </xpath>
-
+            <xpath expr="//field[@name='token_type']" position="attributes">
+                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+            </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>
                 <field name="default_viettelpost_order_payment" invisible="delivery_type != 'viettelpost'"/>
                 <field name="default_viettelpost_product_type" invisible="delivery_type != 'viettelpost'"/>

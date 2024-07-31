@@ -88,7 +88,7 @@
                 >
                     <group>
                         <field name="is_locally_delivery" invisible="1"/>
-                        <group>
+                        <group string="API Connect Information" name="delivery_api_connect_information">
                             <label for="domain"/>
                             <div class="o_row api_config_group">
                                 <field name="domain" widget="url"/>
@@ -104,14 +104,16 @@
                                 />
                             </div>
                         </group>
-                        <group>
+                        <group name="delivery_token" string="Security Key">
+                            <field name="token_type"/>
                             <field name="access_token" widget="CopyClipboardChar"/>
                         </group>
                         <group name="delivery_default_shipment" string="Default Shipment Parameter">
-                            <field name="base_weight_unit"/>
+                            <field name="base_weight_unit" readonly="1"/>
                             <field name="default_promo_code"/>
                         </group>
                         <group name="delivery_webhook" string="Webhook">
+                            <field name="is_webhook_registered" invisible="1"/>
                             <field name="webhook_url" widget="CopyClipboardChar" readonly="True"/>
                             <label for="is_use_authentication"/>
                             <div class="o_row">
@@ -164,7 +166,7 @@
                         </form>
                     </field>
                 </page>
-                <page name="status"
+                <page name="delivery_status"
                       string="Status"
                       invisible="delivery_type == 'fixed' or delivery_type == 'base_on_rule'"
                 >

@@ -29,7 +29,6 @@ class ProviderGrab(models.Model):
     grab_client_secret = fields.Char(string='Client Secret')
     grab_grant_type = fields.Char(string='Grant Type')
     grab_scope = fields.Char(string='Scope')
-    grab_token_type = fields.Char(string='Token Type')
     grab_expire_token_date = fields.Datetime(string='Expire Token Date', readonly=True)
 
     default_grab_payer = fields.Selection(selection=settings.payer.value, string='Payer')
@@ -71,7 +70,7 @@ class ProviderGrab(models.Model):
                 'scope': self.grab_scope
             })
             self.write({
-                'grab_token_type': result.get('token_type'),
+                'token_type': result.get('token_type'),
                 'access_token': result.get('access_token'),
                 'grab_expire_token_date': self._compute_expires_seconds_to_datetime(result.get('expires_in'))
             })
@@ -152,20 +151,7 @@ class ProviderGrab(models.Model):
         }
 
     @staticmethod
-    def _validate_address(partner_id):
-        if not partner_id.state_id:
-            raise ValidationError(_(f'The state of partner: {partner_id.name} is required'))
-        elif not partner_id.district_id:
-            raise ValidationError(_(f'The district of partner: {partner_id.name} is required'))
-        elif not partner_id.ward_id:
-            raise ValidationError(_(f'The ward of partner: {partner_id.name} is required'))
-        elif not partner_id.street:
-            raise ValidationError(_(f'The street of partner: {partner_id.name} is required'))
-
-    @staticmethod
     def _validate_picking(picking):
-        if not picking.partner_id.phone and not picking.partner_id.mobile:
-            raise UserError(_('The number phone of recipient is required.'))
         if picking.promo_code and not picking.grab_payment_method:
             raise UserError(_('You are using a promo code, please select a payment method. This is required.'))
         elif picking.grab_payer == 'RECIPIENT' and picking.grab_payment_method == 'CASHLESS':

@@ -13,7 +13,6 @@
             <xpath expr="//field[@name='access_token']" position="before">
                 <field name="grab_grant_type" invisible="delivery_type != 'grab'"/>
                 <field name="grab_scope" invisible="delivery_type != 'grab'"/>
-                <field name="grab_token_type" invisible="delivery_type != 'grab'" readonly="1"/>
                 <field name="grab_expire_token_date" invisible="delivery_type != 'grab'"/>
             </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>

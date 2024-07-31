@@ -3,6 +3,7 @@ import re
 import pytz
 import functools
 from typing import NamedTuple, Any, Optional
+from datetime import datetime
 from urllib.parse import urlencode, unquote_plus
 from odoo import _, SUPERUSER_ID
 from odoo.exceptions import UserError
@@ -17,25 +18,37 @@ def response(status, message, data=None):
     return response
 
 
-def authentication(func):
-    @functools.wraps(func)
-    def wrap(self, *args, **kwargs):
-        access_token = request.httprequest.headers.get('Authorization')
-        access_token = re.sub(r'^Bearer\s+', '', access_token)
-        if not access_token:
-            return response(
-                message='The header Authorization missing',
-                status=status.HTTP_401_UNAUTHORIZED.value
-            )
-        carrier_id = request.env['delivery.carrier'].sudo().search([('webhook_access_token', '=', access_token)])
-        if not carrier_id:
-            return response(
-                message=f'The access token seems to have invalid.',
-                status=status.HTTP_403_FORBIDDEN.value
-            )
-        request.update_env(SUPERUSER_ID)
-        return func(self, *args, **kwargs)
-    return wrap
+def authentication(carrier):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrap(self, *args, **kwargs):
+            carrier_id = request.env['delivery.carrier'].sudo().search([('delivery_type', '=', carrier)])
+            if not carrier_id:
+                return response(
+                    message=f'The {carrier} carrier not found.',
+                    status=status.HTTP_404_NOT_FOUND.value
+                )
+            if carrier_id.is_use_authentication:
+                token_sources = [
+                    lambda: request.httprequest.headers.get('Authorization', '').replace('Bearer ', ''),
+                    lambda: request.httprequest.args.get('access_token'),
+                    lambda: kwargs.get('access_token')
+                ]
+                access_token = next((source() for source in token_sources if source()), None)
+                if not access_token:
+                    return response(
+                        message='The access token is required',
+                        status=status.HTTP_400_BAD_REQUEST.value
+                    )
+                if carrier_id.webhook_access_token != access_token:
+                    return response(
+                        message=f'The access token seems to have invalid.',
+                        status=status.HTTP_401_UNAUTHORIZED.value
+                    )
+            request.update_env(SUPERUSER_ID)
+            return func(self, *args, **kwargs)
+        return wrap
+    return decorator
 
 
 def notification(notification_type: str, message: str):
@@ -60,6 +73,14 @@ def get_route_api(provider_id, code):
 def datetime_to_rfc3339(dt, time_zone):
     dt = dt.astimezone(pytz.timezone(time_zone))
     return dt.isoformat()
+
+
+def datetime_to_iso_8601(dt):
+    return datetime.strftime(dt, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+
+def rfc3339_to_datetime(dt):
+    return datetime.strptime(dt, "%Y-%m-%dT%H:%M:%S.%fZ")
 
 
 def standardization_e164(phone_number):

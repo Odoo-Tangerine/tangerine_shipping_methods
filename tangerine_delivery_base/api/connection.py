@@ -23,13 +23,15 @@ class Connection:
             elif method == 'GET':
                 response = requests.get(url=url, headers=headers, params=kwargs)
             elif method == 'DELETE':
-                response = requests.delete(url=url, headers=headers, data=kwargs)
+                response = requests.delete(url=url, headers=headers, json=kwargs)
             elif method == 'PUT':
                 response = requests.put(url=url, headers=headers, data=kwargs)
+            elif method == 'PATCH':
+                response = requests.patch(url=url, headers=headers, json=kwargs)
             else:
                 raise UserError(_(f'The interface not support method: {method}'))
             response.raise_for_status()
-            if response.status_code not in [status.HTTP_200_OK.value, status.HTTP_204_NO_CONTENT.value]:
+            if response.status_code not in range(status.HTTP_200_OK.value, status.HTTP_300_MULTIPLE_CHOICES.value):
                 raise UserError(response.text)
             if response.status_code == status.HTTP_204_NO_CONTENT.value:
                 return True
