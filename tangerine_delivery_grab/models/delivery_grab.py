@@ -151,20 +151,7 @@ class ProviderGrab(models.Model):
         }
 
     @staticmethod
-    def _validate_address(partner_id):
-        if not partner_id.state_id:
-            raise ValidationError(_(f'The state of partner: {partner_id.name} is required'))
-        elif not partner_id.district_id:
-            raise ValidationError(_(f'The district of partner: {partner_id.name} is required'))
-        elif not partner_id.ward_id:
-            raise ValidationError(_(f'The ward of partner: {partner_id.name} is required'))
-        elif not partner_id.street:
-            raise ValidationError(_(f'The street of partner: {partner_id.name} is required'))
-
-    @staticmethod
     def _validate_picking(picking):
-        if not picking.partner_id.phone and not picking.partner_id.mobile:
-            raise UserError(_('The number phone of recipient is required.'))
         if picking.promo_code and not picking.grab_payment_method:
             raise UserError(_('You are using a promo code, please select a payment method. This is required.'))
         elif picking.grab_payer == 'RECIPIENT' and picking.grab_payment_method == 'CASHLESS':

@@ -5,7 +5,6 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
-    is_goods_fragile = fields.Boolean(string='Goods Fragile', default=False)
     remarks = fields.Char(string='Remarks')
     cash_on_delivery = fields.Boolean(string='COD', default=False)
     cash_on_delivery_amount = fields.Monetary(string='COD Money')

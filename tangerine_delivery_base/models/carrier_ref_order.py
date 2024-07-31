@@ -29,5 +29,6 @@ class CarrierRefOrder(models.Model):
 
     driver_name = fields.Char(related='picking_id.driver_name', string='Driver Name')
     driver_phone = fields.Char(related='picking_id.driver_phone', string='Driver Phone')
+    driver_license_plate = fields.Char(related='picking_id.driver_license_plate')
     promo_code = fields.Char(related='picking_id.promo_code', string='Promo Code')
     delivery_status_id = fields.Many2one(related='picking_id.delivery_status_id', string='Delivery Status')

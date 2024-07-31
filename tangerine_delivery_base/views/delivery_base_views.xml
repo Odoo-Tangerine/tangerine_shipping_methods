@@ -104,7 +104,7 @@
                                 />
                             </div>
                         </group>
-                        <group name="delivery_token">
+                        <group name="delivery_token" string="Security Key">
                             <field name="token_type"/>
                             <field name="access_token" widget="CopyClipboardChar"/>
                         </group>

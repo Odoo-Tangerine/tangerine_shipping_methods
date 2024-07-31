@@ -122,7 +122,7 @@ class ProviderGrab(models.Model):
             payload['data']['specialRequests'] = [rec.code for rec in picking.lalamove_special_service_ids]
         if picking.schedule_order:
             payload['data']['scheduleAt'] = datetime_to_iso_8601(picking.schedule_pickup_time_to)
-        if picking.is_goods_fragile:
+        if picking.is_lalamove_goods_fragile:
             payload['data']['item']['handlingInstructions'] = ['FRAGILE_OR_HANDLE_WITH_CARE_']
         return payload
 

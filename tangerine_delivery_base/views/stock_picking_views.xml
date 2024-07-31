@@ -20,7 +20,6 @@
             </field>
             <xpath expr="//group[@name='carrier_data']" position="after">
                 <group name='delivery_carrier_data' invisible="carrier_tracking_ref" string="Provider Shipping Information">
-                    <field name="is_goods_fragile" widget="boolean_toggle"/>
                     <label for="cash_on_delivery" name="o_label_cash_on_delivery"/>
                     <div class="o_row" name="o_div_cash_on_delivery">
                         <field name="cash_on_delivery" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>

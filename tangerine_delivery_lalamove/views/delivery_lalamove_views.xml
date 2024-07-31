@@ -57,13 +57,13 @@
                         string="Register Webhook"
                         icon="oi-arrow-right"
                         type="object"
-                        invisible="is_webhook_registered"
+                        invisible="is_webhook_registered or delivery_type != 'lalamove'"
                 />
                 <button name="action_lalamove_update_webhook"
                         string="Update Webhook"
                         icon="oi-arrow-right"
                         type="object"
-                        invisible="not is_webhook_registered"
+                        invisible="not is_webhook_registered or delivery_type != 'lalamove'"
                 />
             </xpath>
         </field>
