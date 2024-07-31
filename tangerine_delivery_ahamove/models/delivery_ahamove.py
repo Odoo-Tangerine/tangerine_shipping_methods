@@ -205,7 +205,4 @@ class ProviderAhamove(models.Model):
 
     @staticmethod
     def ahamove_get_tracking_link(picking):
-        route = f'/share-order/{picking.carrier_tracking_ref}/{picking.carrier_id.ahamove_partner_phone}'
-        if picking.prod_enviroment:
-            return f'{settings.tracking_url_production.value}{route}'
-        return f'{settings.tracking_url_staging.value}{route}'
+        return picking.ahamove_shared_link

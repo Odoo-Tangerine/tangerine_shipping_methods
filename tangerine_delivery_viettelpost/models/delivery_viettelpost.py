@@ -72,7 +72,7 @@ class ProviderViettelpost(models.Model):
             'RECEIVER_ADDRESS': f'{order.partner_shipping_id.shipping_address}',
         }
 
-    def viettelpost_rate_shipment(self, order) -> dict[str, Any]:
+    def viettelpost_rate_shipment(self, order):
         client = Client(Connection(self, get_route_api(self, settings.estimate_cost_route.value)))
         result = client.estimate_cost(self._viettelpost_payload_estimate_cost(order))
         return {

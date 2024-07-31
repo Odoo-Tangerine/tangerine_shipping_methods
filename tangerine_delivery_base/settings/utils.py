@@ -51,7 +51,7 @@ def authentication(carrier):
     return decorator
 
 
-def notification(notification_type: str, message: str):
+def notification(notification_type, message):
     return {
         'type': 'ir.actions.client',
         'tag': 'display_notification',

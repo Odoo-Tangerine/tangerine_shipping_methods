@@ -4,29 +4,29 @@ from typing import Final
 
 
 class settings(Enum):
-    domain_staging: Final[str] = 'https://apistg.ahamove.com'
-    domain_production: Final[str] = 'https://api.ahamove.com'
-    tracking_url_staging: Final[str] = 'https://cloudstg.ahamove.com'
-    tracking_url_production: Final[str] = 'https://cloud.ahamove.com'
-    ahamove_code: Final[str] = 'ahamove'
+    domain_staging = 'https://apistg.ahamove.com'
+    domain_production = 'https://api.ahamove.com'
+    tracking_url_staging = 'https://cloudstg.ahamove.com'
+    tracking_url_production = 'https://cloud.ahamove.com'
+    ahamove_code = 'ahamove'
 
-    get_token_route_code: Final[str] = 'get_token'
-    estimate_order_route_code: Final[str] = 'estimate_order'
-    create_order_route_code: Final[str] = 'create_order'
-    cancel_order_route_code: Final[str] = 'cancel_order'
-    city_sync_route_code: Final[str] = 'city_sync'
-    service_sync_route_code: Final[str] = 'service_sync'
+    get_token_route_code = 'get_token'
+    estimate_order_route_code = 'estimate_order'
+    create_order_route_code = 'create_order'
+    cancel_order_route_code = 'cancel_order'
+    city_sync_route_code = 'city_sync'
+    service_sync_route_code = 'service_sync'
 
-    payment_method: Final[list[tuple[str, str]]] = [
+    payment_method = [
         ('BALANCE', 'BALANCE'),
         ('CASH', 'CASH'),
     ]
-    default_payment_method: Final[str] = 'BALANCE'
+    default_payment_method = 'BALANCE'
 
-    request_group_bulky: Final[str] = 'BULKY'
-    request_group_tip: Final[str] = 'TIP'
-    default_tier: Final[str] = 'TIER_1'
-    list_status_cancellation_allowed: Final[str] = ['ASSIGNING', 'ACCEPTED', 'CONFIRMING', 'PAYING', 'IDLE']
-    status_completed: Final[str] = 'COMPLETED'
-    cancel_reason: Final[str] = 'Merchant asks for order cancellation'
-    cancel_reason_code: Final[str] = 'partner_merchant_asks_for_order_cancellation'
+    request_group_bulky = 'BULKY'
+    request_group_tip = 'TIP'
+    default_tier = 'TIER_1'
+    list_status_cancellation_allowed = ['ASSIGNING', 'ACCEPTED', 'CONFIRMING', 'PAYING', 'IDLE']
+    status_completed = 'COMPLETED'
+    cancel_reason = 'Merchant asks for order cancellation'
+    cancel_reason_code = 'partner_merchant_asks_for_order_cancellation'
