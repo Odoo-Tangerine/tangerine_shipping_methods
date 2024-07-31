@@ -4,11 +4,13 @@ from odoo.http import request, Controller, route
 from odoo.addons.tangerine_delivery_base.settings.utils import authentication, response
 from odoo.addons.tangerine_delivery_base.settings.status import status
 
+from ..settings.constants import settings
+
 _logger = logging.getLogger(__name__)
 
 
 class DeliveriesController(Controller):
-    @authentication
+    @authentication(settings.ahamove_code.value)
     @route('/webhook/v1/delivery/ahamove', type='json', auth='public', methods=['POST'])
     def ahamove_callback(self):
         try:
