@@ -13,10 +13,6 @@
                 <field name="grab_payer" invisible="delivery_type != 'grab'"/>
                 <field name="grab_high_value" widget="boolean_toggle" invisible="delivery_type != 'grab'"/>
             </xpath>
-            <xpath expr="//field[@name='driver_phone']" position="after">
-                <field name="grab_driver_license_plate" string="License Plate" invisible="delivery_type != 'grab'"/>
-                <field name="grab_driver_photo_url" string="Photo URL" widget="url" invisible="delivery_type != 'grab'"/>
-            </xpath>
         </field>
     </record>
 </odoo>

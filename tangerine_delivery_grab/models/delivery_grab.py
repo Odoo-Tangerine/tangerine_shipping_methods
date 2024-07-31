@@ -29,7 +29,6 @@ class ProviderGrab(models.Model):
     grab_client_secret = fields.Char(string='Client Secret')
     grab_grant_type = fields.Char(string='Grant Type')
     grab_scope = fields.Char(string='Scope')
-    grab_token_type = fields.Char(string='Token Type')
     grab_expire_token_date = fields.Datetime(string='Expire Token Date', readonly=True)
 
     default_grab_payer = fields.Selection(selection=settings.payer.value, string='Payer')
@@ -71,7 +70,7 @@ class ProviderGrab(models.Model):
                 'scope': self.grab_scope
             })
             self.write({
-                'grab_token_type': result.get('token_type'),
+                'token_type': result.get('token_type'),
                 'access_token': result.get('access_token'),
                 'grab_expire_token_date': self._compute_expires_seconds_to_datetime(result.get('expires_in'))
             })

@@ -5,6 +5,7 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
+    is_goods_fragile = fields.Boolean(string='Goods Fragile', default=False)
     remarks = fields.Char(string='Remarks')
     cash_on_delivery = fields.Boolean(string='COD', default=False)
     cash_on_delivery_amount = fields.Monetary(string='COD Money')
@@ -14,6 +15,7 @@ class StockPicking(models.Model):
 
     driver_name = fields.Char(string='Driver Name', readonly=True)
     driver_phone = fields.Char(string='Driver Phone', readonly=True)
+    driver_license_plate = fields.Char(string='Driver License Plate', readonly=True)
     promo_code = fields.Char(string='Promo Code')
     delivery_status_id = fields.Many2one('delivery.status', string='Delivery Status', readonly=True)
     delivery_status_code = fields.Char(related='delivery_status_id.code')

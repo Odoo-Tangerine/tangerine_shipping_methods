@@ -11,6 +11,7 @@ class DeliveryBase(models.Model):
 
     image = fields.Binary(string='Icon image')
     access_token = fields.Char(string='Access Token')
+    token_type = fields.Char(string='Token Type')
     domain = fields.Char(string='Domain')
     route_api_ids = fields.One2many(
         'delivery.route.api',
@@ -33,6 +34,7 @@ class DeliveryBase(models.Model):
     is_locally_delivery = fields.Boolean(string='Locally Delivery', default=False)
     is_support_multi_stop_delivery = fields.Boolean(string='Have Support for Multi-stop Delivery', default=False)
     is_use_authentication = fields.Boolean(string='Authentication Use', default=False)
+    is_webhook_registered = fields.Boolean(string='Webhook Registered', default=False)
     webhook_access_token = fields.Char(string='Access Token')
     webhook_url = fields.Char(string='URL')
 
@@ -48,6 +50,16 @@ class DeliveryBase(models.Model):
         if weight > 0.0:
             new_value = max(new_value, 0.01)
         return new_value
+
+    @staticmethod
+    def _compute_quantity(lines):
+        quantity = 0
+        for line in lines:
+            if line._name == 'sale.order.line':
+                quantity += line.product_uom_qty
+            else:
+                quantity += line.quantity
+        return quantity
 
     def action_test_connection(self):
         self.ensure_one()
@@ -111,7 +123,8 @@ class DeliveryRouteAPI(models.Model):
         ('POST', 'POST'),
         ('DELETE', 'DELETE'),
         ('PUT', 'PUT'),
-        ('GET', 'GET')
+        ('GET', 'GET'),
+        ('PATCH', 'PATCH')
     ], string='Method', required=True, tracking=True)
     active = fields.Boolean(default=True)
     headers = fields.Json(string='Headers', tracking=True)

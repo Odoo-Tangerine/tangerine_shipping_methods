@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form_with_provider_lalamove" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.provider.lalamove</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('api_config_group')]" position='after'>
+                <field name="lalamove_api_key" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
+                <field name="lalamove_api_secret" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
+            </xpath>
+            <xpath expr="//button[@name='get_access_token']" position="attributes">
+                <attribute name="invisible">delivery_type == 'lalamove'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='default_promo_code']" position="attributes">
+                <attribute name="invisible">delivery_type == 'lalamove'</attribute>
+            </xpath>
+            <xpath expr="//group[@name='delivery_token']" position="attributes">
+                <attribute name="invisible">delivery_type == 'lalamove'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='default_promo_code']" position='after'>
+                <field name="default_lalamove_regional_id"
+                       required="delivery_type == 'lalamove'"
+                       invisible="delivery_type != 'lalamove'"
+                />
+                <field name="default_lalamove_service_id" invisible="delivery_type != 'lalamove'"/>
+                <field name="default_lalamove_special_service_ids"
+                       invisible="delivery_type != 'lalamove'"
+                       domain="lalamove_special_service_domain"
+                       widget="many2many_tags"
+                />
+                <field name="lalamove_special_service_domain" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='delivery_status']" position='before'>
+                <page string="Services" name="lalamove_service" invisible="delivery_type != 'lalamove'">
+                    <field name="lalamove_service_ids" mode="tree" readonly="1">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Special Services" name="lalamove_spec_service" invisible="delivery_type != 'lalamove'">
+                    <field name="lalamove_spec_service_ids" mode="tree" readonly="1">
+                        <tree editable="bottom">
+                            <field name="service_id"/>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="description"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//button[@name='action_generate_access_token']" position="after">
+                <button name="action_lalamove_update_webhook"
+                        string="Register Webhook"
+                        icon="oi-arrow-right"
+                        type="object"
+                        invisible="is_webhook_registered"
+                />
+                <button name="action_lalamove_update_webhook"
+                        string="Update Webhook"
+                        icon="oi-arrow-right"
+                        type="object"
+                        invisible="not is_webhook_registered"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

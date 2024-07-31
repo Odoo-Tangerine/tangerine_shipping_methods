@@ -13,6 +13,9 @@
                 <field name="ahamove_api_key" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
                 <field name="ahamove_refresh_token" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
             </xpath>
+            <xpath expr="//field[@name='token_type']" position="attributes">
+                <attribute name="invisible">delivery_type == 'ahamove'</attribute>
+            </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>
                 <field name="default_ahamove_service_id" invisible="delivery_type != 'ahamove'"/>
                 <field name="default_ahamove_service_request_ids"
