@@ -82,13 +82,6 @@ class ProviderViettelpost(models.Model):
             'warning_message': False
         }
 
-    @staticmethod
-    def _compute_quantity(lines):
-        quantity = 0
-        for line in lines:
-            quantity += line.quantity
-        return quantity
-
     def _viettelpost_payload_create_order(self, picking):
         sender_id = picking.picking_type_id.warehouse_id.partner_id
         recipient_id = picking.partner_id
@@ -110,7 +103,7 @@ class ProviderViettelpost(models.Model):
                 picking._get_estimated_weight(),
                 self.base_weight_unit
             )),
-            'PRODUCT_QUANTITY': self._compute_quantity(picking.move_ids),
+            'PRODUCT_QUANTITY': self._compute_quantity(picking.move_ids_without_package),
             'PRODUCT_PRICE': picking.sale_id.amount_total,
             'PRODUCT_TYPE': picking.viettelpost_product_type,
             'MONEY_COLLECTION': 0,

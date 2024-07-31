@@ -40,8 +40,7 @@ class DeliveriesController(Controller):
                 payload.update({
                     'driver_name': body.get('driver').get('name'),
                     'driver_phone': body.get('driver').get('phone'),
-                    'grab_driver_license_plate': body.get('driver').get('licensePlate'),
-                    'grab_driver_photo_url': body.get('driver').get('photoURL'),
+                    'driver_license_plate': body.get('driver').get('licensePlate'),
                 })
             picking_id.sudo().write(payload)
             _logger.info(f'WEBHOOK GRAB SUCCESS: Receive order callback {body.get("deliveryID")} successfully.')

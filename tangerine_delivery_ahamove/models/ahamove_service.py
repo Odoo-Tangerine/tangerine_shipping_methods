@@ -8,7 +8,7 @@ class AhamoveService(models.Model):
     warehouse_id = fields.Many2one('stock.warehouse', string='Warehouse', required=True)
     name = fields.Char(string='Name', required=True, readonly=True)
     code = fields.Char(string='Code', required=True, readonly=True)
-    active = fields.Boolean(defaut=True)
+    active = fields.Boolean(default=True)
     description = fields.Char(string='Description')
     request_ids = fields.One2many('ahamove.service.request', 'service_id', 'Requests')
 

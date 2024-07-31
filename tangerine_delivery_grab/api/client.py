@@ -17,7 +17,7 @@ class Client:
     def _build_header(self, ):
         headers = json.loads(safe_eval(self.conn.endpoint.headers))
         if self.conn.endpoint.is_need_access_token:
-            headers.update({'Authorization': f'{self.conn.provider.grab_token_type} {self.conn.provider.access_token}'})
+            headers.update({'Authorization': f'{self.conn.provider.token_type} {self.conn.provider.access_token}'})
         return headers
 
     def _execute(self, payload=None, path_parameter=None):

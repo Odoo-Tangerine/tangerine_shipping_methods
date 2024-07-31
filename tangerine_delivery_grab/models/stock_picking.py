@@ -15,8 +15,6 @@ class StockPicking(models.Model):
         default=settings.default_cod_type.value
     )
     grab_high_value = fields.Boolean(string='Order High Value', default=False)
-    grab_driver_license_plate = fields.Char(string='Driver License Plate', readonly=True)
-    grab_driver_photo_url = fields.Char(string='Driver Photo Url', readonly=True)
     grab_tracking_link = fields.Char(string='Grab Tracking Link')
 
     @api.onchange('carrier_id')
