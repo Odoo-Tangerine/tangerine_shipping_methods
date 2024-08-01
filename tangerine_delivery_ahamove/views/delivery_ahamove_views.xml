@@ -5,7 +5,7 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('api_config_group')]" position='after'>
+            <xpath expr="//field[@name='domain']" position='after'>
                 <field name="ahamove_partner_name" attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"/>
                 <field name="ahamove_partner_phone" widget="phone" attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"/>
             </xpath>

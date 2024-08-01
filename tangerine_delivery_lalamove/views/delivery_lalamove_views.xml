@@ -5,7 +5,7 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('api_config_group')]" position='after'>
+            <xpath expr="//field[@name='domain']" position='after'>
                 <field name="lalamove_api_key" widget="CopyClipboardChar" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"/>
                 <field name="lalamove_api_secret" widget="CopyClipboardChar" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"/>
             </xpath>
@@ -25,11 +25,6 @@
                 <label for="default_lalamove_service_id" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"/>
                 <div class="o_row" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}">
                     <field name="default_lalamove_service_id"/>
-                    <button name="action_lalamove_sync_cities"
-                            string="Cities Synchronous"
-                            icon="fa-arrow-right"
-                            type="object"
-                    />
                 </div>
                 <field name="default_lalamove_special_service_ids"
                        attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"
@@ -60,15 +55,21 @@
             <xpath expr="//button[@name='action_generate_access_token']" position="after">
                 <button name="action_lalamove_update_webhook"
                         string="Register Webhook"
-                        icon="fa-arrow-right"
+                        class="btn btn-primary"
                         type="object"
                         attrs="{'invisible': ['|', ('is_webhook_registered', '=', True), ('delivery_type', '!=', 'lalamove')]}"
                 />
                 <button name="action_lalamove_update_webhook"
                         string="Update Webhook"
-                        icon="fa-arrow-right"
+                        class="btn btn-primary"
                         type="object"
                         attrs="{'invisible': ['|', ('is_webhook_registered', '=', False), ('delivery_type', '!=', 'lalamove')]}"
+                />
+                <button name="action_lalamove_sync_cities"
+                        string="Cities Synchronous"
+                        class="btn btn-primary"
+                        type="object"
+                        attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"
                 />
             </xpath>
         </field>

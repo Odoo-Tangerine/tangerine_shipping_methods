@@ -14,7 +14,7 @@ class DeliveriesController(Controller):
     @route('/webhook/v1/delivery/grab', type='json', auth='public', methods=['POST'])
     def grab_callback(self):
         try:
-            body = request.dispatcher.jsonrequest
+            body = request.jsonrequest
             _logger.info(f'WEBHOOK GRAB START - BODY: {body}')
             picking_id = request.env['stock.picking'].sudo().search([
                 ('carrier_tracking_ref', '=', body.get('deliveryID'))

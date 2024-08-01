@@ -13,7 +13,7 @@ class DeliveriesController(Controller):
     @route(['/webhook/v1/delivery/lalamove', '/webhook/v1/delivery/lalamove/<string:access_token>'], type='json', auth='public', methods=['POST'])
     def lalamove_callback(self):
         try:
-            body = request.dispatcher.jsonrequest
+            body = request.jsonrequest
             _logger.info(f'WEBHOOK LALAMOVE START - BODY: {body}')
             if body.get('data') and body.get('data').get('order') and body.get('data').get('order').get('orderId'):
                 order_id = body.get('data').get('order').get('orderId')

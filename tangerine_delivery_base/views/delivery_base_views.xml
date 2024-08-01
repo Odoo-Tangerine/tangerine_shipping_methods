@@ -12,7 +12,6 @@
                 <field name="image"/>
                 <field name="delivery_type"/>
                 <field name="is_locally_delivery"/>
-                <field name="carrier_description"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
@@ -78,6 +77,25 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button name="action_test_connection"
+                            string="Test Connection"
+                            type="object"
+                    />
+                    <button name="get_access_token"
+                            string="Get Access Token"
+                            class="btn btn-primary"
+                            type="object"
+                    />
+                    <button name="action_generate_access_token"
+                            string="Generate Access Token Webhook"
+                            class="btn btn-primary"
+                            type="object"
+                            attrs="{'invisible': [('is_use_authentication', '=', False)]}"
+                    />
+                </header>
+            </xpath>
             <xpath expr="//div[hasclass('oe_button_box')]" position="after">
                 <field name="image" widget='image' class="oe_avatar"/>
             </xpath>
@@ -89,20 +107,7 @@
                     <group>
                         <field name="is_locally_delivery" invisible="1"/>
                         <group string="API Connect Information" name="delivery_api_connect_information">
-                            <label for="domain"/>
-                            <div class="o_row api_config_group">
-                                <field name="domain" widget="url"/>
-                                <button name="action_test_connection"
-                                        string="Test Connection"
-                                        icon="fa-plug"
-                                        type="object"
-                                />
-                                <button name="get_access_token"
-                                        string="Get Access Token"
-                                        icon="fa-refresh"
-                                        type="object"
-                                />
-                            </div>
+                            <field name="domain" widget="url"/>
                         </group>
                         <group name="delivery_token" string="Security Key">
                             <field name="token_type"/>
@@ -115,16 +120,7 @@
                         <group name="delivery_webhook" string="Webhook">
                             <field name="is_webhook_registered" invisible="1"/>
                             <field name="webhook_url" widget="CopyClipboardChar" readonly="True"/>
-                            <label for="is_use_authentication"/>
-                            <div class="o_row">
-                                <field name="is_use_authentication" widget="boolean_toggle"/>
-                                <button name="action_generate_access_token"
-                                        string="Generate Access Token"
-                                        icon="fa-arrow-right"
-                                        type="object"
-                                        attrs="{'invisible': [('is_use_authentication', '=', False)]}"
-                                />
-                            </div>
+                            <field name="is_use_authentication" widget="boolean_toggle"/>
                             <field name="webhook_access_token"
                                    attrs="{'invisible': [('is_use_authentication', '=', False)]}"
                                    widget="CopyClipboardChar"

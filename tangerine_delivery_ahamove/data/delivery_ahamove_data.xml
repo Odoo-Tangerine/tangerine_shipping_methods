@@ -25,7 +25,6 @@
             <field name="is_support_multi_stop_delivery" eval="True"/>
             <field name="default_ahamove_payment_method">BALANCE</field>
             <field name="base_weight_unit">G</field>
-            <field name="carrier_description">Ahamove APIs will allow shipper to easily place, cancel, get quotes and track the order via simple integration</field>
         </record>
 
         <function model="delivery.carrier" name="set_webhook_url">

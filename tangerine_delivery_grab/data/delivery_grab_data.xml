@@ -30,7 +30,6 @@
             <field name="default_grab_service_type">INSTANT</field>
             <field name="default_grab_vehicle_type">BIKE</field>
             <field name="default_grab_payment_method">CASHLESS</field>
-            <field name="carrier_description">GrabExpress APIs will allow shipper to easily place, cancel, get quotes and track the order via simple integration</field>
         </record>
 
         <function model="delivery.carrier" name="set_webhook_url">

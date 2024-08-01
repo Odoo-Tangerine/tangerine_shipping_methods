@@ -26,7 +26,6 @@
             <field name="base_weight_unit">KG</field>
             <field name="token_type">hmac</field>
             <field name="default_lalamove_regional_id" ref="tangerine_delivery_lalamove.regional_VN"/>
-            <field name="carrier_description">Lalamove APIs will allow shipper to easily place, cancel, get quotes and track the order via simple integration</field>
         </record>
 
         <function model="delivery.carrier" name="set_webhook_url">

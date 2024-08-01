@@ -13,7 +13,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
         'special_id',
         string='Special Service'
     )
-    lalamove_quotation_data = fields.Json(string='Lalamove Quotation Data')
+    lalamove_quotation_data = fields.Char(string='Lalamove Quotation Data')
 
     @api.onchange('carrier_id', 'total_weight')
     def _onchange_lalamove_provider(self):

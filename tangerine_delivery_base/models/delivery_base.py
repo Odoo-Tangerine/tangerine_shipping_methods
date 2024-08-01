@@ -175,7 +175,7 @@ class DeliveryRouteAPI(models.Model):
         ('PATCH', 'PATCH')
     ], string='Method', required=True, tracking=True)
     active = fields.Boolean(default=True)
-    headers = fields.Json(string='Headers', tracking=True)
+    headers = fields.Char(string='Headers', tracking=True)
 
 
 class DeliveryStatus(models.Model):

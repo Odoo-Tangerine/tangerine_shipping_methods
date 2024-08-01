@@ -14,7 +14,7 @@ class DeliveriesController(Controller):
     @route('/webhook/v1/delivery/ahamove', type='json', auth='public', methods=['POST'])
     def ahamove_callback(self):
         try:
-            body = request.dispatcher.jsonrequest
+            body = request.jsonrequest
             _logger.info(f'WEBHOOK AHAMOVE START - BODY: {body}')
             picking_id = request.env['stock.picking'].sudo().search([
                 ('carrier_tracking_ref', '=', body.get('_id'))

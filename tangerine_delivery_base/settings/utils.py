@@ -45,7 +45,7 @@ def authentication(carrier):
                         message=f'The access token seems to have invalid.',
                         status=status.HTTP_401_UNAUTHORIZED.value
                     )
-            request.update_env(SUPERUSER_ID)
+            request.session.uid = SUPERUSER_ID
             return func(self, *args, **kwargs)
         return wrap
     return decorator

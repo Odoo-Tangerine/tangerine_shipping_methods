@@ -27,7 +27,6 @@
             <field name="default_viettelpost_product_type">HH</field>
             <field name="default_viettelpost_national_type">1</field>
             <field name="default_print_order_paper">a5</field>
-            <field name="carrier_description">Viettel Post APIs will allow shipper to easily place, cancel, get quotes and track the order via simple integration</field>
         </record>
 
         <function model="delivery.carrier" name="set_webhook_url">
