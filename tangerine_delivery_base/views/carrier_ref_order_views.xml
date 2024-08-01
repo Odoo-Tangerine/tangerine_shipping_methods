@@ -20,8 +20,13 @@
                             <field name="carrier_id"/>
                             <label for="cash_on_delivery"/>
                             <div class="o_row">
-                                <field name="cash_on_delivery" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
-                                <field name="cash_on_delivery_amount" readonly="carrier_tracking_ref" invisible="not cash_on_delivery"/>
+                                <field name="cash_on_delivery"
+                                       style="max-width: 15%;"
+                                       widget="boolean_toggle"
+                                />
+                                <field name="cash_on_delivery_amount"
+                                       attrs="{'invisible': [('cash_on_delivery', '=', False)]}"
+                                />
                             </div>
                         </group>
                         <group>
@@ -30,18 +35,17 @@
                             <field name="promo_code"/>
                             <label for="schedule_order" name="o_label_schedule_order"/>
                             <div class="o_row" name="o_schedule_order">
-                                <field name="schedule_order" style="max-width: 15%;" widget="boolean_toggle" readonly="carrier_tracking_ref"/>
-                                <strong invisible="not schedule_order">From:</strong>
-                                <field name="schedule_pickup_time_from"
-                                       invisible="not schedule_order"
-                                       required="schedule_order"
-                                       readonly="carrier_tracking_ref"
+                                <field name="schedule_order"
+                                       style="max-width: 15%;"
+                                       widget="boolean_toggle"
                                 />
-                                <strong invisible="not schedule_order">To:</strong>
+                                <strong attrs="{'invisible': [('schedule_order', '=', False)]}">From:</strong>
+                                <field name="schedule_pickup_time_from"
+                                       attrs="{'invisible': [('schedule_order', '=', False)]}"
+                                />
+                                <strong attrs="{'invisible': [('schedule_order', '=', False)]}">To:</strong>
                                 <field name="schedule_pickup_time_to"
-                                       invisible="not schedule_order"
-                                       required="schedule_order"
-                                       readonly="carrier_tracking_ref"
+                                       attrs="{'invisible': [('schedule_order', '=', False)]}"
                                 />
                             </div>
                             <field name="remarks"/>
@@ -67,7 +71,7 @@
                 <field name="sale_id"/>
                 <field name="carrier_id"/>
                 <field name="carrier_tracking_ref"/>
-                <field name="delivery_charge"/>
+                <field name="delivery_charge" sum="Delivery Charge"/>
                 <field name="cash_on_delivery"/>
                 <field name="delivery_status_id" widget="badge"/>
             </tree>

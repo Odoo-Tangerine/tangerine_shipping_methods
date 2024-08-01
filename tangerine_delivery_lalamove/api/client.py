@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from odoo.tools.safe_eval import safe_eval
 from odoo.addons.tangerine_delivery_base.api.connection import Connection
 from odoo.addons.tangerine_delivery_base.settings.utils import URLBuilder
-
+from ..settings.constants import settings
 
 @dataclass
 class Client:
@@ -20,7 +20,7 @@ class Client:
         if path_parameter:
             path = f'{path}/{path_parameter}'
         body_str += f'\r\n{path}'
-        body_str += f'\r\n\r\n{json.dumps(payload or {})}'
+        body_str += f'\r\n\r\n{json.dumps(payload or {})}' if self.conn.endpoint.code != settings.llm_get_cities_code.value else f'\r\n\r\n'
         return hmac.new(
             self.conn.provider.lalamove_api_secret.encode(),
             body_str.encode(),

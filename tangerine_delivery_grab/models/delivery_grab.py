@@ -95,11 +95,11 @@ class ProviderGrab(models.Model):
     def _grab_get_packages(self, line_ids):
         packages = []
         for line in line_ids:
-            if hasattr(line, 'quantity'):
+            if hasattr(line, 'quantity_done'):
                 packages.append({
                     'name': line.name,
                     'description': line.name,
-                    'quantity': int(line.quantity) if hasattr(line, 'quantity') else int(line.product_uom_qty),
+                    'quantity': int(line.quantity_done) if hasattr(line, 'quantity_done') else int(line.product_uom_qty),
                     'dimensions': {
                         'height': 0,
                         'width': 0,
@@ -112,7 +112,7 @@ class ProviderGrab(models.Model):
                     packages.append({
                         'name': line.name,
                         'description': line.name,
-                        'quantity': int(line.quantity) if hasattr(line, 'quantity') else int(line.product_uom_qty),
+                        'quantity': int(line.quantity_done) if hasattr(line, 'quantity_done') else int(line.product_uom_qty),
                         'dimensions': {
                             'height': 0,
                             'width': 0,

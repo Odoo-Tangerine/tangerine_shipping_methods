@@ -43,7 +43,7 @@
                                             <t t-if="!record.prod_environment.raw_value">
                                                 <button name="toggle_prod_environment"
                                                    type="object"
-                                                   invisible="delivery_type == 'fixed' or delivery_type == 'base_on_rule'"
+                                                   attrs="{'invisible': ['|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule')]}"
                                                    icon="fa-stop"
                                                 >
                                                     <span class="text-warning">
@@ -54,7 +54,7 @@
                                             <t t-else="">
                                                 <button name="toggle_prod_environment"
                                                    type="object"
-                                                   invisible="delivery_type == 'fixed' or delivery_type == 'base_on_rule'"
+                                                   attrs="{'invisible': ['|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule')]}"
                                                    icon="fa-play"
                                                 >
                                                     <span class="text-success">
@@ -78,13 +78,13 @@
         <field name="model">delivery.carrier</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('oe_button_box')]" position="before">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="after">
                 <field name="image" widget='image' class="oe_avatar"/>
             </xpath>
             <xpath expr="//page[@name='destination']" position='before'>
                 <page string="Integrated Configuration"
                       name="delivery_configuration"
-                      invisible="not is_locally_delivery"
+                      attrs="{'invisible': [('is_locally_delivery', '=', False)]}"
                 >
                     <group>
                         <field name="is_locally_delivery" invisible="1"/>
@@ -120,25 +120,29 @@
                                 <field name="is_use_authentication" widget="boolean_toggle"/>
                                 <button name="action_generate_access_token"
                                         string="Generate Access Token"
-                                        icon="oi-arrow-right"
+                                        icon="fa-arrow-right"
                                         type="object"
-                                        invisible="not is_use_authentication"
+                                        attrs="{'invisible': [('is_use_authentication', '=', False)]}"
                                 />
                             </div>
-                            <field name="webhook_access_token" invisible="not is_use_authentication" widget="CopyClipboardChar" readonly="True"/>
+                            <field name="webhook_access_token"
+                                   attrs="{'invisible': [('is_use_authentication', '=', False)]}"
+                                   widget="CopyClipboardChar"
+                                   readonly="True"
+                            />
                         </group>
                     </group>
                 </page>
                 <page name="route_api"
                       string="Routes"
-                      invisible="delivery_type == 'fixed' or delivery_type == 'base_on_rule'"
+                      attrs="{'invisible': ['|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule')]}"
                 >
                     <field name="route_api_ids" mode="tree">
                         <tree editable="bottom">
                             <field name="name"/>
                             <field name="method"/>
                             <field name="route"/>
-                            <field name="headers" widget="code" options="{'mode': 'js'}"/>
+                            <field name="headers"/>
                             <field name="is_need_access_token" widget="boolean_toggle"/>
                             <field name="active" widget="boolean_toggle"/>
                         </tree>
@@ -154,7 +158,7 @@
                             <group>
                                 <group>
                                     <field name="code" invisible="1"/>
-                                    <field name="headers" widget="code" options="{'mode': 'js'}"/>
+                                    <field name="headers"/>
                                     <field name="method"/>
                                 </group>
                                 <group>
@@ -168,7 +172,7 @@
                 </page>
                 <page name="delivery_status"
                       string="Status"
-                      invisible="delivery_type == 'fixed' or delivery_type == 'base_on_rule'"
+                      attrs="{'invisible': ['|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule')]}"
                 >
                     <field name="status_ids" mode="tree">
                         <tree editable="bottom">

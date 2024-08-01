@@ -20,7 +20,6 @@ class ProviderAhamove(models.Model):
     ahamove_partner_name = fields.Char(string='Name')
     ahamove_partner_phone = fields.Char(string='Phone')
     ahamove_refresh_token = fields.Char(string='Refresh Token')
-    ahamove_service_request_domain = fields.Binary(default=[], store=False)
     default_ahamove_service_id = fields.Many2one('ahamove.service', string='Service Type')
     default_ahamove_service_request_ids = fields.Many2many(
         'ahamove.service.request',
@@ -35,7 +34,11 @@ class ProviderAhamove(models.Model):
     def _onchange_default_ahamove_service_id(self):
         for rec in self:
             if rec.default_ahamove_service_id:
-                rec.ahamove_service_request_domain = [('service_id', '=', rec.default_ahamove_service_id.id)]
+                return {
+                    'domain': {
+                        'default_ahamove_service_request_ids': [('service_id', '=', rec.default_ahamove_service_id.id)]
+                    },
+                }
 
     def _ahamove_payload_get_token(self):
         return {
@@ -133,9 +136,9 @@ class ProviderAhamove(models.Model):
             'items': [
                 {
                     '_id': line.product_id.id,
-                    'num': line.quantity,
+                    'num': line.quantity_done,
                     'name': line.product_id.name,
-                    'price': line.product_id.list_price * line.quantity
+                    'price': line.product_id.list_price * line.quantity_done
                 } for line in picking.move_ids_without_package
             ]
         }

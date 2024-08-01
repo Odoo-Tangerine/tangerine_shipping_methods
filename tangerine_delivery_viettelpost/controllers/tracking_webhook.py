@@ -17,6 +17,7 @@ class DeliveriesController(Controller):
         try:
             body = request.dispatcher.jsonrequest
             _logger.info(f'WEBHOOK VIETTELPOST START - BODY: {body}')
+            body = body.get('DATA')
             picking_id = request.env['stock.picking'].sudo().search([
                 ('carrier_tracking_ref', '=', body.get('ORDER_NUMBER'))
             ])

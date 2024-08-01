@@ -5,14 +5,13 @@ from ..settings.constants import settings
 class ChooseDeliveryCarrier(models.TransientModel):
     _inherit = 'choose.delivery.carrier'
 
-    lalamove_service_id = fields.Many2one('lalamove.service', string='Service Type')
-    lalamove_special_service_domain = fields.Binary(default=[], store=False)
+    lalamove_service_id = fields.Many2one('lalamove.service', string='Vehicle Type')
     lalamove_special_service_ids = fields.Many2many(
         'lalamove.special.service',
         'lalamove_estimate_request_rel',
         'choose_id',
         'special_id',
-        string='Special Request'
+        string='Special Service'
     )
     lalamove_quotation_data = fields.Json(string='Lalamove Quotation Data')
 
@@ -29,7 +28,11 @@ class ChooseDeliveryCarrier(models.TransientModel):
     def _onchange_lalamove_service_id(self):
         for rec in self:
             if rec.lalamove_service_id:
-                rec.lalamove_special_service_domain = [('service_id', '=', rec.lalamove_service_id.id)]
+                return {
+                    'domain': {
+                        'lalamove_special_service_ids': [('service_id', '=', rec.lalamove_service_id.id)]
+                    },
+                }
 
     def _get_shipment_rate(self):
         if self.carrier_id.delivery_type == settings.lalamove_code.value:
@@ -39,7 +42,7 @@ class ChooseDeliveryCarrier(models.TransientModel):
                 'llm_special_service': [spec.code for spec in self.lalamove_special_service_ids],
             })
             self.env.context = context
-        vals = self.carrier_id.with_context(order_weight=self.total_weight).rate_shipment(self.order_id)
+        vals = self.carrier_id.rate_shipment(self.order_id)
         if vals.get('success'):
             self.delivery_message = vals.get('warning_message', False)
             self.delivery_price = vals['price']

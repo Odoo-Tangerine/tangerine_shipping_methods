@@ -8,7 +8,6 @@ class StockPicking(models.Model):
     viettelpost_order_payment = fields.Selection(selection=settings.order_payment.value, string='Payment Type')
     viettelpost_product_type = fields.Selection(selection=settings.product_type.value, string='Product Type')
     viettelpost_national_type = fields.Selection(selection=settings.national_type.value, string='Types of Shipments')
-    viettelpost_service_request_domain = fields.Binary(default=[], store=False)
     viettelpost_service_id = fields.Many2one('viettelpost.service', string='Service')
     viettelpost_service_extend_id = fields.Many2one('viettelpost.service.extend', string='Service Extend')
 
@@ -37,7 +36,11 @@ class StockPicking(models.Model):
     def _onchange_viettelpost_service_id(self):
         for rec in self:
             if rec.viettelpost_service_id:
-                rec.viettelpost_service_request_domain = [('service_id', '=', rec.viettelpost_service_id.id)]
+                return {
+                    'domain': {
+                        'viettelpost_service_extend_id': [('service_id', '=', rec.viettelpost_service_id.id)]
+                    },
+                }
 
     def action_print_order_viettelpost(self):
         self.ensure_one()

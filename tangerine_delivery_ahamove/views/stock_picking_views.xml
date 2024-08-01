@@ -6,21 +6,17 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='promo_code']" position="before">
-                <field name="ahamove_service_request_domain" invisible="1"/>
                 <field name="ahamove_service_id"
-                       required="delivery_type == 'ahamove'"
                        options="{'no_create_edit': True}"
-                       invisible="delivery_type != 'ahamove'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'ahamove')], 'required': [('delivery_type', '=', 'ahamove')],'readonly': [('carrier_tracking_ref', '=', True)]}"
                 />
                 <field name="ahamove_service_request_ids"
                        widget="many2many_tags"
-                       domain="ahamove_service_request_domain"
                        options="{'no_create_edit': True}"
-                       invisible="delivery_type != 'ahamove'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'ahamove')], 'readonly': [('carrier_tracking_ref', '=', True)]}"
                 />
                 <field name="ahamove_payment_method"
-                       invisible="delivery_type != 'ahamove'"
-                       required="delivery_type == 'ahamove'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'ahamove')], 'required': [('delivery_type', '=', 'ahamove')],'readonly': [('carrier_tracking_ref', '=', True)]}"
                 />
             </xpath>
         </field>

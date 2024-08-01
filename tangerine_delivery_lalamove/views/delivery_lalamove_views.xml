@@ -6,33 +6,38 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="lalamove_api_key" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
-                <field name="lalamove_api_secret" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
+                <field name="lalamove_api_key" widget="CopyClipboardChar" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"/>
+                <field name="lalamove_api_secret" widget="CopyClipboardChar" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"/>
             </xpath>
             <xpath expr="//button[@name='get_access_token']" position="attributes">
-                <attribute name="invisible">delivery_type == 'lalamove'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'lalamove')]}</attribute>
             </xpath>
             <xpath expr="//field[@name='default_promo_code']" position="attributes">
-                <attribute name="invisible">delivery_type == 'lalamove'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'lalamove')]}</attribute>
             </xpath>
             <xpath expr="//group[@name='delivery_token']" position="attributes">
-                <attribute name="invisible">delivery_type == 'lalamove'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'lalamove')]}</attribute>
             </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>
                 <field name="default_lalamove_regional_id"
-                       required="delivery_type == 'lalamove'"
-                       invisible="delivery_type != 'lalamove'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'lalamove')],'required': [('delivery_type', '=', 'lalamove')]}"
                 />
-                <field name="default_lalamove_service_id" invisible="delivery_type != 'lalamove'"/>
+                <label for="default_lalamove_service_id" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"/>
+                <div class="o_row" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}">
+                    <field name="default_lalamove_service_id"/>
+                    <button name="action_lalamove_sync_cities"
+                            string="Cities Synchronous"
+                            icon="fa-arrow-right"
+                            type="object"
+                    />
+                </div>
                 <field name="default_lalamove_special_service_ids"
-                       invisible="delivery_type != 'lalamove'"
-                       domain="lalamove_special_service_domain"
+                       attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"
                        widget="many2many_tags"
                 />
-                <field name="lalamove_special_service_domain" invisible="1"/>
             </xpath>
             <xpath expr="//page[@name='delivery_status']" position='before'>
-                <page string="Services" name="lalamove_service" invisible="delivery_type != 'lalamove'">
+                <page string="Services" name="lalamove_service" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}">
                     <field name="lalamove_service_ids" mode="tree" readonly="1">
                         <tree editable="bottom">
                             <field name="name"/>
@@ -41,7 +46,7 @@
                         </tree>
                     </field>
                 </page>
-                <page string="Special Services" name="lalamove_spec_service" invisible="delivery_type != 'lalamove'">
+                <page string="Special Services" name="lalamove_spec_service" attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}">
                     <field name="lalamove_spec_service_ids" mode="tree" readonly="1">
                         <tree editable="bottom">
                             <field name="service_id"/>
@@ -55,15 +60,15 @@
             <xpath expr="//button[@name='action_generate_access_token']" position="after">
                 <button name="action_lalamove_update_webhook"
                         string="Register Webhook"
-                        icon="oi-arrow-right"
+                        icon="fa-arrow-right"
                         type="object"
-                        invisible="is_webhook_registered or delivery_type != 'lalamove'"
+                        attrs="{'invisible': ['|', ('is_webhook_registered', '=', True), ('delivery_type', '!=', 'lalamove')]}"
                 />
                 <button name="action_lalamove_update_webhook"
                         string="Update Webhook"
-                        icon="oi-arrow-right"
+                        icon="fa-arrow-right"
                         type="object"
-                        invisible="not is_webhook_registered or delivery_type != 'lalamove'"
+                        attrs="{'invisible': ['|', ('is_webhook_registered', '=', False), ('delivery_type', '!=', 'lalamove')]}"
                 />
             </xpath>
         </field>

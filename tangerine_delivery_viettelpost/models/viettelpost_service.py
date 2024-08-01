@@ -17,10 +17,8 @@ class ViettelPostService(models.Model):
     code = fields.Char(string='Code', required=True)
     extend_ids = fields.One2many('viettelpost.service.extend', 'service_id', string='Service Extend')
 
-    @api.depends('code', 'name')
-    def _compute_display_name(self):
-        for rec in self:
-            rec.display_name = f'[{rec.code}] - {rec.name}'
+    def name_get(self):
+        return [(rec.id, f'[{rec.code}] - {rec.name}') for rec in self]
 
     _sql_constraints = [
         ('code_uniq', 'unique (code)', 'Service already exists!'),
@@ -57,10 +55,8 @@ class ViettelPostServiceExtend(models.Model):
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Code', required=True)
 
-    @api.depends('code', 'name')
-    def _compute_display_name(self):
-        for rec in self:
-            rec.display_name = f'[{rec.code}] - {rec.name}'
+    def name_get(self):
+        return [(rec.id, f'[{rec.code}] - {rec.name}') for rec in self]
 
     _sql_constraints = [
         ('service_id_code_uniq', 'unique (service_id, code)', 'Service extend already exists!'),

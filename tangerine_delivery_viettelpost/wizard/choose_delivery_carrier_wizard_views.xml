@@ -7,16 +7,13 @@
         <field name="arch" type="xml">
             <field name="carrier_id" position="after">
                 <field name="viettelpost_service_id"
-                       invisible="delivery_type != 'viettelpost'"
-                       required="delivery_type == 'viettelpost'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')], 'required': [('delivery_type', '=', 'viettelpost')]}"
                 />
                 <field name="viettelpost_service_extend_id"
-                       invisible="delivery_type != 'viettelpost'"
-                       domain="viettelpost_service_request_domain"
+                       attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')]}"
                 />
-                <field name="viettelpost_national_type" invisible="delivery_type != 'viettelpost'"/>
-                <field name="viettelpost_product_type" invisible="delivery_type != 'viettelpost'"/>
-                <field name="viettelpost_service_request_domain" invisible="1"/>
+                <field name="viettelpost_national_type" attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')]}"/>
+                <field name="viettelpost_product_type" attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')]}"/>
             </field>
         </field>
     </record>

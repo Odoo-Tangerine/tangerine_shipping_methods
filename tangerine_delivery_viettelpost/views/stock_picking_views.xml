@@ -10,38 +10,32 @@
                         name="action_print_order_viettelpost"
                         string="Print"
                         class="fa fa-print oe_link"
-                        invisible="delivery_type != 'viettelpost' or not carrier_tracking_ref"
+                        attrs="{'invisible': ['|', ('delivery_type', '!=', 'viettelpost'), ('carrier_tracking_ref', '=', False)]}"
                 />
             </xpath>
             <xpath expr="//field[@name='promo_code']" position="before">
                 <field name="viettelpost_order_payment"
-                       required="delivery_type == 'viettelpost'"
-                       invisible="delivery_type != 'viettelpost'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')], 'required': [('delivery_type', '=', 'viettelpost')]}"
                 />
                 <field name="viettelpost_product_type"
-                       required="delivery_type == 'viettelpost'"
-                       invisible="delivery_type != 'viettelpost'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')], 'required': [('delivery_type', '=', 'viettelpost')]}"
                 />
                 <field name="viettelpost_national_type"
-                       required="delivery_type == 'viettelpost'"
-                       invisible="delivery_type != 'viettelpost'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')], 'required': [('delivery_type', '=', 'viettelpost')]}"
                 />
                 <field name="viettelpost_service_id"
-                       required="delivery_type == 'viettelpost'"
-                       invisible="delivery_type != 'viettelpost'"
-                       domain="viettelpost_service_request_domain"
+                       attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')], 'required': [('delivery_type', '=', 'viettelpost')]}"
                 />
-                <field name="viettelpost_service_extend_id" invisible="delivery_type != 'viettelpost'"/>
-                <field name="viettelpost_service_request_domain" invisible="1"/>
+                <field name="viettelpost_service_extend_id" attrs="{'invisible': [('delivery_type', '!=', 'viettelpost')]}"/>
             </xpath>
             <xpath expr="//label[@name='o_label_schedule_order']" position="attributes">
-                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'viettelpost')]}</attribute>
             </xpath>
             <xpath expr="//div[@name='o_schedule_order']" position="attributes">
-                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'viettelpost')]}</attribute>
             </xpath>
             <xpath expr="//group[@name='delivery_driver_data']" position="attributes">
-                <attribute name="invisible">delivery_type == 'viettelpost'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'viettelpost')]}</attribute>
             </xpath>
         </field>
     </record>

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import math
-from typing import Any
-from odoo import fields, models, _
+from odoo import fields, models, _, api
 from odoo.exceptions import UserError
 from odoo.tools import ustr
 from odoo.addons.tangerine_delivery_base.settings.utils import (
@@ -30,10 +29,19 @@ class ProviderViettelpost(models.Model):
         selection=settings.national_type.value,
         string='Types of Shipments'
     )
-    viettelpost_service_request_domain = fields.Binary(default=[], store=False)
     default_viettelpost_service_id = fields.Many2one('viettelpost.service', string='Service')
     default_viettelpost_service_extend_id = fields.Many2one('viettelpost.service.extend', string='Service Extend')
     default_print_order_paper = fields.Selection(settings.paper_print.value, string='Print Order Paper')
+
+    @api.onchange('default_viettelpost_service_id')
+    def _onchange_default_viettelpost_service_id(self):
+        for rec in self:
+            if rec.default_viettelpost_service_id:
+                return {
+                    'domain': {
+                        'default_viettelpost_service_extend_id': [('service_id', '=', rec.default_viettelpost_service_id.id)]
+                    },
+                }
 
     def _payload_get_token(self):
         return {
@@ -115,7 +123,7 @@ class ProviderViettelpost(models.Model):
                     line.product_id.weight,
                     self.base_weight_unit
                 )),
-                'PRODUCT_QUANTITY': line.quantity
+                'PRODUCT_QUANTITY': line.quantity_done
             } for line in picking.move_ids_without_package]
         }
         if picking.cash_on_delivery and picking.cash_on_delivery_amount > 0.0:

@@ -5,7 +5,7 @@
     'author': 'Long Duong Nhat',
     'category': 'Inventory/Delivery',
     'support': 'odoo.tangerine@gmail.com',
-    'version': '17.0.1.0',
+    'version': '16.0.1.0',
     'depends': ['tangerine_delivery_base'],
     'data': [
         'data/delivery_grab_data.xml',
@@ -17,6 +17,7 @@
         'wizard/choose_delivery_carrier_wizard_views.xml',
         'views/delivery_grab_views.xml',
         'views/stock_picking_views.xml',
+        'views/grab_res_state_views.xml',
     ],
     'images': ['static/description/thumbnail.png'],
     'license': 'OPL-1',

@@ -7,16 +7,13 @@
         <field name="arch" type="xml">
             <field name="carrier_id" position="after">
                 <field name="lalamove_service_id"
-                       invisible="delivery_type != 'lalamove'"
-                       required="delivery_type == 'lalamove'"
+                       attrs="{'invisible': [('delivery_type', '!=', 'lalamove')],'required': [('delivery_type', '=', 'lalamove')]}"
                 />
                 <field name="lalamove_special_service_ids"
                        widget="many2many_tags"
                        options="{'no_create': True}"
-                       invisible="delivery_type != 'lalamove'"
-                       domain="lalamove_special_service_domain"
+                       attrs="{'invisible': [('delivery_type', '!=', 'lalamove')]}"
                 />
-                <field name="lalamove_special_service_domain" invisible="1"/>
             </field>
         </field>
     </record>

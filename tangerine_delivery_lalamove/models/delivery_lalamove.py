@@ -2,7 +2,7 @@
 import json
 import math
 from datetime import datetime
-from odoo import fields, models, _
+from odoo import fields, models, _, api
 from odoo.exceptions import UserError
 from odoo.addons.tangerine_delivery_base.settings.utils import (
     standardization_e164,
@@ -29,8 +29,7 @@ class ProviderGrab(models.Model):
     lalamove_service_ids = fields.One2many('lalamove.service', 'carrier_id')
     lalamove_spec_service_ids = fields.One2many('lalamove.special.service', 'carrier_id')
     default_lalamove_regional_id = fields.Many2one('lalamove.regional', string='Regional', required=True)
-    default_lalamove_service_id = fields.Many2one('lalamove.service', string='Service Type')
-    lalamove_special_service_domain = fields.Binary(default=[], store=False)
+    default_lalamove_service_id = fields.Many2one('lalamove.service', string='Vehicle Type')
     default_lalamove_special_service_ids = fields.Many2many(
         'lalamove.special.service',
         'lalamove_carrier_service_rel',
@@ -38,6 +37,19 @@ class ProviderGrab(models.Model):
         'special_id',
         string='Special Service'
     )
+
+    def action_lalamove_sync_cities(self):
+        self.env['lalamove.service'].llm_service_synchronous()
+
+    @api.onchange('default_lalamove_service_id')
+    def _onchange_default_lalamove_service_id(self):
+        for rec in self:
+            if rec.default_lalamove_service_id:
+                return {
+                    'domain': {
+                        'default_lalamove_special_service_ids': [('service_id', '=', rec.default_lalamove_service_id.id)]
+                    },
+                }
 
     def _llm_get_enum_weight(self, instance):
         total_weight = math.ceil(self.convert_weight(instance._get_estimated_weight(), self.base_weight_unit))

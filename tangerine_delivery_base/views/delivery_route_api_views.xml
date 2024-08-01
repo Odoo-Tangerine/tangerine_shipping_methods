@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form>
                 <field name="active" invisible="1"/>
-                <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                 <sheet>
                     <div name="button_box" class="oe_button_box">
                         <button name="toggle_active" string="Archived" type="object" class="oe_stat_button" icon="fa-archive"/>
@@ -23,7 +23,7 @@
                             <field name="method"/>
                         </group>
                         <group>
-                            <field name="headers" widget="code" options="{'mode': 'js'}"/>
+                            <field name="headers"/>
                             <field name="domain"/>
                             <field name="route"/>
                             <field name="is_need_access_token" widget="boolean_toggle"/>

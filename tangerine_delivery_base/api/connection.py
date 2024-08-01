@@ -19,15 +19,15 @@ class Connection:
         try:
             _logger.warning(f'[{self.provider.delivery_type.upper()}] - [EXECUTE API]: {method}: {url} - Header: {headers} - Body: {kwargs}')
             if method == 'POST':
-                response = requests.post(url=url, headers=headers, json=kwargs)
+                response = requests.post(url=url, headers=headers, json=kwargs, timeout=300)
             elif method == 'GET':
-                response = requests.get(url=url, headers=headers, params=kwargs)
+                response = requests.get(url=url, headers=headers, params=kwargs, timeout=300)
             elif method == 'DELETE':
-                response = requests.delete(url=url, headers=headers, json=kwargs)
+                response = requests.delete(url=url, headers=headers, json=kwargs, timeout=300)
             elif method == 'PUT':
-                response = requests.put(url=url, headers=headers, data=kwargs)
+                response = requests.put(url=url, headers=headers, data=kwargs, timeout=300)
             elif method == 'PATCH':
-                response = requests.patch(url=url, headers=headers, json=kwargs)
+                response = requests.patch(url=url, headers=headers, json=kwargs, timeout=300)
             else:
                 raise UserError(_(f'The interface not support method: {method}'))
             response.raise_for_status()

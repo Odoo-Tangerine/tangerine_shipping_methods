@@ -6,7 +6,6 @@ class ChooseDeliveryCarrier(models.TransientModel):
     _inherit = 'choose.delivery.carrier'
 
     ahamove_service_id = fields.Many2one('ahamove.service', string='Service')
-    ahamove_service_request_domain = fields.Binary(default=[], store=False)
     ahamove_service_request_ids = fields.Many2many(
         'ahamove.service.request',
         'estimate_request_rel',
@@ -29,7 +28,11 @@ class ChooseDeliveryCarrier(models.TransientModel):
     def _onchange_ahamove_service_id(self):
         for rec in self:
             if rec.ahamove_service_id:
-                rec.ahamove_service_request_domain = [('service_id', '=', rec.ahamove_service_id.id)]
+                return {
+                    'domain': {
+                        'ahamove_service_request_ids': [('service_id', '=', rec.ahamove_service_id.id)]
+                    },
+                }
 
     def _get_shipment_rate(self):
         if self.carrier_id.delivery_type == settings.ahamove_code.value:

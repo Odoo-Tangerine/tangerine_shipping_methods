@@ -12,10 +12,8 @@ class AhamoveService(models.Model):
     description = fields.Char(string='Description')
     request_ids = fields.One2many('ahamove.service.request', 'service_id', 'Requests')
 
-    @api.depends('code', 'name')
-    def _compute_display_name(self):
-        for rec in self:
-            rec.display_name = f'[{rec.code}] - {rec.name}'
+    def name_get(self):
+        return [(rec.id, f'[{rec.code}] - {rec.name}') for rec in self]
 
     _sql_constraints = [
         ('code_and_warehouse_uniq', 'unique (code, warehouse_id)', 'The service already exists!'),
@@ -32,10 +30,8 @@ class AhamoveServiceRequest(models.Model):
     description = fields.Char(string='Description')
     type_of_request = fields.Char(string='Type of Request')
 
-    @api.depends('code', 'name')
-    def _compute_display_name(self):
-        for rec in self:
-            rec.display_name = f'[{rec.code}] - {rec.name}'
+    def name_get(self):
+        return [(rec.id, f'[{rec.code}] - {rec.name}') for rec in self]
 
     _sql_constraints = [
         ('code_and_service_uniq', 'unique (code, service_id)', 'The request already exists!'),

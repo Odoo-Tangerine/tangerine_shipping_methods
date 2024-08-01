@@ -6,7 +6,6 @@ from ..settings.constants import settings
 class ChooseDeliveryCarrier(models.TransientModel):
     _inherit = 'choose.delivery.carrier'
 
-    viettelpost_service_request_domain = fields.Binary(default=[], store=False)
     viettelpost_service_id = fields.Many2one('viettelpost.service', string='Service')
     viettelpost_service_extend_id = fields.Many2one('viettelpost.service.extend', string='Service Extend')
     viettelpost_national_type = fields.Selection(selection=settings.national_type.value, string='National Type')
@@ -27,7 +26,11 @@ class ChooseDeliveryCarrier(models.TransientModel):
     def _onchange_viettelpost_service_id(self):
         for rec in self:
             if rec.viettelpost_service_id:
-                rec.viettelpost_service_request_domain = [('service_id', '=', rec.viettelpost_service_id.id)]
+                return {
+                    'domain': {
+                        'viettelpost_service_extend_id': [('service_id', '=', rec.viettelpost_service_id.id)]
+                    },
+                }
 
     def _get_shipment_rate(self):
         if self.carrier_id.delivery_type == settings.code.value:

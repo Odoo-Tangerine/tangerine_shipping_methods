@@ -6,25 +6,27 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="ahamove_partner_name" invisible="delivery_type != 'ahamove'"/>
-                <field name="ahamove_partner_phone" widget="phone" invisible="delivery_type != 'ahamove'"/>
+                <field name="ahamove_partner_name" attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"/>
+                <field name="ahamove_partner_phone" widget="phone" attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"/>
             </xpath>
             <xpath expr="//field[@name='access_token']" position="before">
-                <field name="ahamove_api_key" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
-                <field name="ahamove_refresh_token" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
+                <field name="ahamove_api_key" widget="CopyClipboardChar" attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"/>
+                <field name="ahamove_refresh_token" widget="CopyClipboardChar" attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"/>
             </xpath>
             <xpath expr="//field[@name='token_type']" position="attributes">
-                <attribute name="invisible">delivery_type == 'ahamove'</attribute>
+                <attribute name="attrs">{'invisible': [('delivery_type', '=', 'ahamove')]}</attribute>
             </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>
-                <field name="default_ahamove_service_id" invisible="delivery_type != 'ahamove'"/>
+                <field name="default_ahamove_service_id"
+                       attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"
+                />
                 <field name="default_ahamove_service_request_ids"
-                       invisible="delivery_type != 'ahamove'"
-                       domain="ahamove_service_request_domain"
+                       attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"
                        widget="many2many_tags"
                 />
-                <field name="default_ahamove_payment_method" invisible="delivery_type != 'ahamove'"/>
-                <field name="ahamove_service_request_domain" invisible="1"/>
+                <field name="default_ahamove_payment_method"
+                       attrs="{'invisible': [('delivery_type', '!=', 'ahamove')]}"
+                />
             </xpath>
         </field>
     </record>

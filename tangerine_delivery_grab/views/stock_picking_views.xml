@@ -6,12 +6,12 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='promo_code']" position="before">
-                <field name="grab_service_type" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
-                <field name="grab_vehicle_type" invisible="delivery_type != 'grab'"/>
-                <field name="grab_payment_method" invisible="delivery_type != 'grab'"/>
-                <field name="grab_cod_type" invisible="delivery_type != 'grab'"/>
-                <field name="grab_payer" invisible="delivery_type != 'grab'"/>
-                <field name="grab_high_value" widget="boolean_toggle" invisible="delivery_type != 'grab'"/>
+                <field name="grab_service_type" attrs="{'invisible': [('delivery_type', '!=', 'grab')], 'required': [('delivery_type', '=', 'grab')]}"/>
+                <field name="grab_vehicle_type" attrs="{'invisible': [('delivery_type', '!=', 'grab')]}"/>
+                <field name="grab_payment_method" attrs="{'invisible': [('delivery_type', '!=', 'grab')]}"/>
+                <field name="grab_cod_type" attrs="{'invisible': [('delivery_type', '!=', 'grab')]}"/>
+                <field name="grab_payer" attrs="{'invisible': [('delivery_type', '!=', 'grab')]}"/>
+                <field name="grab_high_value" widget="boolean_toggle" attrs="{'invisible': [('delivery_type', '!=', 'grab')]}"/>
             </xpath>
         </field>
     </record>
