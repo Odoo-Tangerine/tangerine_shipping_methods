@@ -13,7 +13,7 @@
                 <button name="%(carrier_ref_order_action)d"
                         type="action"
                         context="{'search_default_picking_id': id}"
-                        class="oi oi-search oe_link btn_view_detail_order"
+                        class="fa fa-search oe_link btn_view_detail_order"
                         string="View"
                         attrs="{'invisible': [('carrier_tracking_ref', '=', False)]}"
                 />

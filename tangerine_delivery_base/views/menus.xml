@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <menuitem id="menu_carrier_ref_order_details"
-          parent="stock.menu_delivery"
+          parent="delivery.menu_delivery"
           name="Carrier Ref Order Details"
           sequence="70"
           action="carrier_ref_order_action"
     />
 
     <menuitem id="menu_delivery_route_api"
-          parent="stock.menu_delivery"
+          parent="delivery.menu_delivery"
           name="Route APIs"
           sequence="80"
           action="delivery_route_api_action"
     />
 
     <menuitem id="menu_delivery_status"
-          parent="stock.menu_delivery"
+          parent="delivery.menu_delivery"
           name="Status"
           sequence="90"
           action="delivery_status_action"
