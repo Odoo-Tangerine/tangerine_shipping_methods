@@ -43,7 +43,7 @@
                                                 <button name="toggle_prod_environment"
                                                    type="object"
                                                    attrs="{'invisible': ['|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule')]}"
-                                                   icon="fa-stop"
+                                                   class="btn fa fa-play"
                                                 >
                                                     <span class="text-warning">
                                                         Test Environment
@@ -54,7 +54,7 @@
                                                 <button name="toggle_prod_environment"
                                                    type="object"
                                                    attrs="{'invisible': ['|', ('delivery_type', '=', 'fixed'), ('delivery_type', '=', 'base_on_rule')]}"
-                                                   icon="fa-play"
+                                                   class="btn fa fa-play"
                                                 >
                                                     <span class="text-success">
                                                         Production Environment
