@@ -23,7 +23,15 @@
                        required="delivery_type == 'lalamove'"
                        invisible="delivery_type != 'lalamove'"
                 />
-                <field name="default_lalamove_service_id" invisible="delivery_type != 'lalamove'"/>
+                <label for="default_lalamove_service_id" invisible="delivery_type != 'lalamove'"/>
+                <div class="o_row" invisible="delivery_type != 'lalamove'">
+                    <field name="default_lalamove_service_id"/>
+                    <button name="action_lalamove_sync_cities"
+                            string="Cities Synchronous"
+                            icon="fa-arrow-right"
+                            type="object"
+                    />
+                </div>
                 <field name="default_lalamove_special_service_ids"
                        invisible="delivery_type != 'lalamove'"
                        domain="lalamove_special_service_domain"

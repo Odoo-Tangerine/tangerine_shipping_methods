@@ -39,6 +39,9 @@ class ProviderGrab(models.Model):
         string='Special Service'
     )
 
+    def action_lalamove_sync_cities(self):
+        self.env['lalamove.service'].llm_service_synchronous()
+
     def _llm_get_enum_weight(self, instance):
         total_weight = math.ceil(self.convert_weight(instance._get_estimated_weight(), self.base_weight_unit))
         if total_weight < 10:

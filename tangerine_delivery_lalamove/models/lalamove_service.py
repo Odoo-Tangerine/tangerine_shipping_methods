@@ -41,6 +41,10 @@ class LLMService(models.Model):
         carrier_id = self.env.ref('tangerine_delivery_lalamove.tangerine_delivery_lalamove_provider')
         if not carrier_id:
             raise UserError(_('The carrier Lalamove not found.'))
+        elif not carrier_id.lalamove_api_key:
+            raise UserError(_('The field API Key of Lalamove not found.'))
+        elif not carrier_id.lalamove_api_secret:
+            raise UserError(_('The field API Secret of Lalamove not found.'))
         client = Client(Connection(carrier_id, get_route_api(carrier_id, settings.llm_get_cities_code.value)))
         result = client.get_cities()
         for rec in result.get('data'):
