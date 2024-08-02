@@ -26,3 +26,10 @@ class StockPicking(models.Model):
                 rec.cash_on_delivery_amount = rec.sale_id.amount_total
             else:
                 rec.cash_on_delivery_amount = 0.0
+
+    def _get_estimated_weight(self):
+        self.ensure_one()
+        weight = 0.0
+        for move in self.move_lines:
+            weight += move.product_qty * move.product_id.weight
+        return weight

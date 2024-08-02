@@ -20,10 +20,7 @@ from ..api.client import Client
 class ProviderGrab(models.Model):
     _inherit = 'delivery.carrier'
 
-    delivery_type = fields.Selection(selection_add=[
-        ('grab', 'Grab Express')
-    ], ondelete={'grab': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
-
+    delivery_type = fields.Selection(selection_add=[('grab', 'Grab Express')])
     grab_partner_id = fields.Char(string='PartnerID')
     grab_client_id = fields.Char(string='ClientID')
     grab_client_secret = fields.Char(string='Client Secret')

@@ -6,25 +6,23 @@ class SaleOrder(models.Model):
 
     def _create_delivery_line(self, carrier, price_unit):
         SaleOrderLine = self.env['sale.order.line']
-        context = {}
         if self.partner_id:
             # set delivery detail in the customer language
-            context['lang'] = self.partner_id.lang
             carrier = carrier.with_context(lang=self.partner_id.lang)
 
         # Apply fiscal position
         taxes = carrier.product_id.taxes_id.filtered(lambda t: t.company_id.id == self.company_id.id)
         taxes_ids = taxes.ids
         if self.partner_id and self.fiscal_position_id:
-            taxes_ids = self.fiscal_position_id.map_tax(taxes).ids
+            taxes_ids = self.fiscal_position_id.map_tax(taxes, carrier.product_id, self.partner_id).ids
 
         # Create the sales order line
-
-        if carrier.product_id.description_sale:
-            so_description = '%s: %s' % (carrier.name,
-                                        carrier.product_id.description_sale)
+        carrier_with_partner_lang = carrier.with_context(lang=self.partner_id.lang)
+        if carrier_with_partner_lang.product_id.description_sale:
+            so_description = '%s: %s' % (carrier_with_partner_lang.name,
+                                        carrier_with_partner_lang.product_id.description_sale)
         else:
-            so_description = carrier.name
+            so_description = carrier_with_partner_lang.name
         values = {
             'order_id': self.id,
             'name': so_description,
@@ -38,13 +36,16 @@ class SaleOrder(models.Model):
             values.update({'lalamove_quotation_data': self.env.context.get('llm_quotation_data')})
         if carrier.invoice_policy == 'real':
             values['price_unit'] = 0
-            values['name'] += _(' (Estimated Cost: %s )', self._format_currency_amount(price_unit))
+            values['name'] += _(' (Estimated Cost: %s )') % self._format_currency_amount(price_unit)
         else:
             values['price_unit'] = price_unit
         if carrier.free_over and self.currency_id.is_zero(price_unit) :
             values['name'] += '\n' + _('Free Shipping')
         if self.order_line:
             values['sequence'] = self.order_line[-1].sequence + 1
+
+        to_update = self.picking_ids.filtered(lambda p: p.state not in ['cancel', 'done'] and p.carrier_tracking_ref == False)
+        if to_update:
+            to_update.write({'carrier_id': carrier.id})
         sol = SaleOrderLine.sudo().create(values)
-        del context
         return sol

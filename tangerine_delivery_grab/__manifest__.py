@@ -5,7 +5,7 @@
     'author': 'Long Duong Nhat',
     'category': 'Inventory/Delivery',
     'support': 'odoo.tangerine@gmail.com',
-    'version': '15.0.1.0',
+    'version': '13.0.1.0',
     'depends': ['tangerine_delivery_base'],
     'data': [
         'data/delivery_grab_data.xml',
@@ -24,6 +24,6 @@
     'installable': True,
     'auto_install': False,
     'application': True,
-    'currency': 'USD',
-    'price': 119.00
+    # 'currency': 'USD',
+    # 'price': 119.00
 }

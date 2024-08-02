@@ -16,10 +16,7 @@ from ..api.client import Client
 class ProviderViettelpost(models.Model):
     _inherit = 'delivery.carrier'
 
-    delivery_type = fields.Selection(selection_add=[
-        ('viettelpost', 'Viettel Post')
-    ], ondelete={'viettelpost': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
-
+    delivery_type = fields.Selection(selection_add=[('viettelpost', 'Viettel Post')])
     viettelpost_username = fields.Char(string='Username')
     viettelpost_password = fields.Char(string='Password')
 

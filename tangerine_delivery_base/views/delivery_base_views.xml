@@ -19,10 +19,10 @@
                                 <img t-att-src="kanban_image('delivery.carrier','image',record.id.raw_value)" class="oe_module_icon" alt="Image"/>
                             </t>
                             <t t-elif="record.is_locally_delivery.raw_value">
-                                <img t-attf-src="/tangerine_delivery_#{record.delivery_type.raw_value}/static/description/icon.png" class="w-100 oe_module_icon" alt="Image"/>
+                                <img t-attf-src="/tangerine_delivery_#{record.delivery_type.raw_value}/static/description/icon.png" class="oe_module_icon" alt="Image"/>
                             </t>
                             <t t-else="">
-                                <img t-attf-src="/tangerine_delivery_base/static/description/images/white.png" class="w-100 oe_module_icon" alt="Image"/>
+                                <img t-attf-src="/tangerine_delivery_base/static/description/images/white.png" class="oe_module_icon" alt="Image"/>
                             </t>
                             <div class="oe_module_desc">
                                 <h4 class="o_kanban_record_title">

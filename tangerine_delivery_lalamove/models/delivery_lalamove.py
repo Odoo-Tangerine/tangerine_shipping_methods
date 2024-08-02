@@ -19,9 +19,7 @@ from ..api.client import Client
 class ProviderGrab(models.Model):
     _inherit = 'delivery.carrier'
 
-    delivery_type = fields.Selection(selection_add=[
-        ('lalamove', 'Lalamove')
-    ], ondelete={'lalamove': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
+    delivery_type = fields.Selection(selection_add=[('lalamove', 'Lalamove')])
 
     lalamove_api_key = fields.Char(string='API Key')
     lalamove_api_secret = fields.Char(string='API Secret')

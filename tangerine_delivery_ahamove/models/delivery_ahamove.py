@@ -12,9 +12,7 @@ from ..api.client import Client
 class ProviderAhamove(models.Model):
     _inherit = 'delivery.carrier'
 
-    delivery_type = fields.Selection(selection_add=[
-        ('ahamove', 'Ahamove')
-    ], ondelete={'ahamove': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
+    delivery_type = fields.Selection(selection_add=[('ahamove', 'Ahamove')])
 
     ahamove_api_key = fields.Char(string='API Key')
     ahamove_partner_name = fields.Char(string='Name')

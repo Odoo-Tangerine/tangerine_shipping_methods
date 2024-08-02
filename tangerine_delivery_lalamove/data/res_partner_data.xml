@@ -5,7 +5,7 @@
             <field name="name">Lalamove</field>
             <field name="company_type">company</field>
             <field name="website">https://www.lalamove.com/vi-vn</field>
-            <field name="category_id" eval="[Command.set([ref('tangerine_delivery_base.delivery_carrier_partner_category')])]"/>
+            <field name="category_id" eval="[(4, (ref('tangerine_delivery_base.delivery_carrier_partner_category')))]"/>
             <field name="street">Tòa nhà Waseco, Số 10, Đường Phổ Quang, Phường 2, Quận Tân Bình, TP.HCM</field>
         </record>
     </data>
