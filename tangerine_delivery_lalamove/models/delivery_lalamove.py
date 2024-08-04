@@ -23,9 +23,6 @@ class ProviderGrab(models.Model):
         ('lalamove', 'Lalamove')
     ], ondelete={'lalamove': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
 
-    lalamove_api_key = fields.Char(string='API Key')
-    lalamove_api_secret = fields.Char(string='API Secret')
-
     lalamove_service_ids = fields.One2many('lalamove.service', 'carrier_id')
     lalamove_spec_service_ids = fields.One2many('lalamove.special.service', 'carrier_id')
     default_lalamove_regional_id = fields.Many2one('lalamove.regional', string='Regional', required=True)

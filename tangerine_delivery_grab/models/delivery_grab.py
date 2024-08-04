@@ -24,13 +24,6 @@ class ProviderGrab(models.Model):
         ('grab', 'Grab Express')
     ], ondelete={'grab': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
 
-    grab_partner_id = fields.Char(string='PartnerID')
-    grab_client_id = fields.Char(string='ClientID')
-    grab_client_secret = fields.Char(string='Client Secret')
-    grab_grant_type = fields.Char(string='Grant Type')
-    grab_scope = fields.Char(string='Scope')
-    grab_expire_token_date = fields.Datetime(string='Expire Token Date', readonly=True)
-
     default_grab_payer = fields.Selection(selection=settings.payer.value, string='Payer')
     default_grab_service_type = fields.Selection(selection=settings.service_type.value, string='Service Type')
     default_grab_vehicle_type = fields.Selection(selection=settings.vehicle_type.value, string='Vehicle Type')
@@ -54,25 +47,25 @@ class ProviderGrab(models.Model):
     def grab_get_access_token(self):
         try:
             self.ensure_one()
-            if not self.grab_client_id:
+            if not self.client_id:
                 raise UserError(_('The field ClientID is required'))
-            elif not self.grab_client_secret:
+            elif not self.client_secret:
                 raise UserError(_('The field Client Secret is required'))
-            elif not self.grab_grant_type:
+            elif not self.grant_type:
                 raise UserError(_('The field Grant Type is required'))
-            elif not self.grab_scope:
+            elif not self.scope:
                 raise UserError(_('The field Scope is required'))
             client = Client(Connection(self, get_route_api(self, settings.oauth_route_code.value)))
             result = client.get_access_token({
-                'client_id': self.grab_client_id,
-                'client_secret': self.grab_client_secret,
-                'grant_type': self.grab_grant_type,
-                'scope': self.grab_scope
+                'client_id': self.client_id,
+                'client_secret': self.client_secret,
+                'grant_type': self.grant_type,
+                'scope': self.scope
             })
             self.write({
                 'token_type': result.get('token_type'),
                 'access_token': result.get('access_token'),
-                'grab_expire_token_date': self._compute_expires_seconds_to_datetime(result.get('expires_in'))
+                'expire_token_date': self._compute_expires_seconds_to_datetime(result.get('expires_in'))
             })
             threaded_update_cron = threading.Thread(target=lambda: self._update_cron_refresh_token(int(result.get('expires_in'))))
             threaded_update_cron.start()

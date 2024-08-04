@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="lalamove_api_key" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
-                <field name="lalamove_api_secret" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
+                <field name="api_key" required="delivery_type == 'lalamove'" widget="CopyClipboardChar" invisible="delivery_type != 'lalamove'"/>
+                <field name="client_secret" required="delivery_type == 'lalamove'" widget="CopyClipboardChar" string="API Secret" invisible="delivery_type != 'lalamove'"/>
             </xpath>
             <xpath expr="//button[@name='get_access_token']" position="attributes">
                 <attribute name="invisible">delivery_type == 'lalamove'</attribute>

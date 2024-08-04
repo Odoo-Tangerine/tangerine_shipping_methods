@@ -24,14 +24,14 @@ class Client:
         body_str += f'\r\n{path}'
         body_str += f'\r\n\r\n{json.dumps(payload or {})}' if self.conn.endpoint.code != settings.llm_get_cities_code.value else f'\r\n\r\n'
         return hmac.new(
-            self.conn.provider.lalamove_api_secret.encode(),
+            self.conn.provider.client_secret.encode(),
             body_str.encode(),
             hashlib.sha256
         ).hexdigest()
 
     def _generate_access_token(self, payload, path_parameter):
         timestamp = str(int(time.time() * 1000))
-        return f'{self.conn.provider.lalamove_api_key}:{timestamp}:{self._generate_signature(timestamp, payload, path_parameter)}'
+        return f'{self.conn.provider.api_key}:{timestamp}:{self._generate_signature(timestamp, payload, path_parameter)}'
 
     @staticmethod
     def _generate_nonce(length=16):

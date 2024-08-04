@@ -6,14 +6,14 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="grab_partner_id" widget="CopyClipboardChar" invisible="delivery_type != 'grab'"/>
-                <field name="grab_client_id" widget="CopyClipboardChar" invisible="delivery_type != 'grab'"/>
-                <field name="grab_client_secret" widget="CopyClipboardChar" invisible="delivery_type != 'grab'"/>
+                <field name="partner_id" widget="CopyClipboardChar" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
+                <field name="client_id" widget="CopyClipboardChar" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
+                <field name="client_secret" widget="CopyClipboardChar" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
             </xpath>
             <xpath expr="//field[@name='access_token']" position="before">
-                <field name="grab_grant_type" invisible="delivery_type != 'grab'"/>
-                <field name="grab_scope" invisible="delivery_type != 'grab'"/>
-                <field name="grab_expire_token_date" invisible="delivery_type != 'grab'"/>
+                <field name="grant_type" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
+                <field name="scope" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
+                <field name="expire_token_date" invisible="delivery_type != 'grab'"/>
             </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>
                 <field name="default_grab_payer" invisible="delivery_type != 'grab'"/>

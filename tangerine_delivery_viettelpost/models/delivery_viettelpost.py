@@ -21,9 +21,6 @@ class ProviderViettelpost(models.Model):
         ('viettelpost', 'Viettel Post')
     ], ondelete={'viettelpost': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
 
-    viettelpost_username = fields.Char(string='Username')
-    viettelpost_password = fields.Char(string='Password')
-
     default_viettelpost_order_payment = fields.Selection(selection=settings.order_payment.value, string='Payment Type')
     default_viettelpost_product_type = fields.Selection(selection=settings.product_type.value, string='Product Type')
     default_viettelpost_national_type = fields.Selection(
@@ -37,16 +34,16 @@ class ProviderViettelpost(models.Model):
 
     def _payload_get_token(self):
         return {
-            'USERNAME': self.viettelpost_username,
-            'PASSWORD': self.viettelpost_password
+            'USERNAME': self.username,
+            'PASSWORD': self.password
         }
 
     def viettelpost_get_access_token(self):
         try:
             self.ensure_one()
-            if not self.viettelpost_username:
+            if not self.username:
                 raise UserError(_('The field Username is required'))
-            elif not self.viettelpost_password:
+            elif not self.password:
                 raise UserError(_('The field Password is required'))
             client = Client(Connection(self, get_route_api(self, settings.get_short_term_token_route.value)))
             result = client.get_short_term_access_token(self._payload_get_token())

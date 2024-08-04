@@ -9,6 +9,17 @@ from ..settings import utils
 class DeliveryBase(models.Model):
     _inherit = 'delivery.carrier'
 
+    username = fields.Char(string='Username')
+    password = fields.Char(string='Password')
+    api_key = fields.Char(string='API Key')
+    refresh_token = fields.Char(string='Refresh Token')
+    partner_id = fields.Char(string='PartnerID')
+    client_id = fields.Char(string='ClientID')
+    client_secret = fields.Char(string='Client Secret')
+    grant_type = fields.Char(string='Grant Type')
+    scope = fields.Char(string='Scope')
+    expire_token_date = fields.Datetime(string='Expire Token Date', readonly=True)
+
     image = fields.Binary(string='Icon image')
     access_token = fields.Char(string='Access Token')
     token_type = fields.Char(string='Token Type')

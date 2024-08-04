@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="viettelpost_username" invisible="delivery_type != 'viettelpost'"/>
-                <field name="viettelpost_password" password="1" invisible="delivery_type != 'viettelpost'"/>
+                <field name="username" required="delivery_type == 'viettelpost'" invisible="delivery_type != 'viettelpost'"/>
+                <field name="password" required="delivery_type == 'viettelpost'" password="1" invisible="delivery_type != 'viettelpost'"/>
             </xpath>
             <xpath expr="//field[@name='token_type']" position="attributes">
                 <attribute name="invisible">delivery_type == 'viettelpost'</attribute>

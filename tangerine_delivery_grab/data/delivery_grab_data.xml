@@ -19,8 +19,8 @@
             <field name="invoice_policy">real</field>
             <field name="sequence">2</field>
             <field name="delivery_type">grab</field>
-            <field name="grab_grant_type">client_credentials</field>
-            <field name="grab_scope">grab_express.partner_deliveries</field>
+            <field name="grant_type">client_credentials</field>
+            <field name="scope">grab_express.partner_deliveries</field>
             <field name="domain">https://partner-api.grab.com</field>
             <field name="product_id" ref="tangerine_delivery_grab.product_product_delivery_grab"/>
             <field name="is_locally_delivery" eval="True"/>

@@ -7,11 +7,11 @@
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
                 <field name="ahamove_partner_name" invisible="delivery_type != 'ahamove'"/>
-                <field name="ahamove_partner_phone" widget="phone" invisible="delivery_type != 'ahamove'"/>
+                <field name="ahamove_partner_phone" required="delivery_type == 'ahamove'" widget="phone" invisible="delivery_type != 'ahamove'"/>
             </xpath>
             <xpath expr="//field[@name='access_token']" position="before">
-                <field name="ahamove_api_key" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
-                <field name="ahamove_refresh_token" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
+                <field name="api_key" required="delivery_type == 'ahamove'" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
+                <field name="refresh_token" widget="CopyClipboardChar" invisible="delivery_type != 'ahamove'"/>
             </xpath>
             <xpath expr="//field[@name='token_type']" position="attributes">
                 <attribute name="invisible">delivery_type == 'ahamove'</attribute>

@@ -16,10 +16,8 @@ class ProviderAhamove(models.Model):
         ('ahamove', 'Ahamove')
     ], ondelete={'ahamove': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
 
-    ahamove_api_key = fields.Char(string='API Key')
     ahamove_partner_name = fields.Char(string='Name')
     ahamove_partner_phone = fields.Char(string='Phone')
-    ahamove_refresh_token = fields.Char(string='Refresh Token')
     ahamove_service_request_domain = fields.Binary(default=[], store=False)
     default_ahamove_service_id = fields.Many2one('ahamove.service', string='Service Type')
     default_ahamove_service_request_ids = fields.Many2many(
@@ -40,7 +38,7 @@ class ProviderAhamove(models.Model):
     def _ahamove_payload_get_token(self):
         return {
             'mobile': standardization_e164(self.ahamove_partner_phone),
-            'api_key': self.ahamove_api_key
+            'api_key': self.api_key
         }
 
     def ahamove_get_access_token(self):
@@ -48,13 +46,13 @@ class ProviderAhamove(models.Model):
         try:
             if not self.ahamove_partner_phone:
                 raise UserError(_('The field phone is required'))
-            elif not self.ahamove_api_key:
+            elif not self.api_key:
                 raise UserError(_('The field API key is required'))
             client = Client(Connection(self, get_route_api(self, settings.get_token_route_code.value)))
             result = client.get_access_token(self._ahamove_payload_get_token())
             self.write({
                 'access_token': result.get('token'),
-                'ahamove_refresh_token': result.get('refresh_token')
+                'refresh_token': result.get('refresh_token')
             })
             return notification('success', 'Get access token successfully')
         except Exception as e:
