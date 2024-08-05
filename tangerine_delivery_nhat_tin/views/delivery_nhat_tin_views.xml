@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="ntl_partner_id" widget="CopyClipboardChar" invisible="delivery_type != 'nhat_tin'"/>
+                <field name="partner_id" widget="CopyClipboardChar" required="delivery_type == 'nhat_tin'" invisible="delivery_type != 'nhat_tin'"/>
             </xpath>
             <xpath expr="//field[@name='default_promo_code']" position='after'>
                 <field name="default_ntl_service_type" invisible="delivery_type != 'nhat_tin'"/>

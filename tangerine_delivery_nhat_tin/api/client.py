@@ -20,8 +20,8 @@ class Client:
     def _build_header(self):
         headers = json.loads(safe_eval(self.conn.endpoint.headers))
         if self.conn.endpoint.is_need_access_token:
-            headers['username'] = 'odoo.tangerine@gmail.com'
-            headers['password'] = 'i3^akHYa8^@7I70Gi6Ht'
+            headers['username'] = self.conn.provider.username
+            headers['password'] = self.conn.provider.password
         return headers
 
     @staticmethod

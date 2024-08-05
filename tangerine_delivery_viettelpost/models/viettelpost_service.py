@@ -53,7 +53,7 @@ class ViettelPostServiceExtend(models.Model):
     _name = 'viettelpost.service.extend'
     _description = 'Viettel Post Service Extend'
 
-    service_id = fields.Many2one('viettelpost.service', required=True, string='Service')
+    service_id = fields.Many2one('viettelpost.service', ondelete = 'cascade', required=True, string='Service')
     name = fields.Char(string='Name', required=True)
     code = fields.Char(string='Code', required=True)
 

@@ -5,7 +5,12 @@ class AhamoveService(models.Model):
     _name = 'ahamove.service'
     _description = 'Ahamove Service'
 
-    warehouse_id = fields.Many2one('stock.warehouse', string='Warehouse', required=True)
+    warehouse_id = fields.Many2one(
+        'stock.warehouse',
+        string='Warehouse',
+        required=True,
+        ondelete='cascade'
+    )
     name = fields.Char(string='Name', required=True, readonly=True)
     code = fields.Char(string='Code', required=True, readonly=True)
     active = fields.Boolean(default=True)
@@ -26,7 +31,11 @@ class AhamoveServiceRequest(models.Model):
     _name = 'ahamove.service.request'
     _description = 'Ahamove Service Request'
 
-    service_id = fields.Many2one('ahamove.service', string='Service')
+    service_id = fields.Many2one(
+        'ahamove.service',
+        string='Service',
+        ondelete = 'cascade'
+    )
     name = fields.Char(string='Name', required=True, readonly=True)
     code = fields.Char(string='Code', required=True, readonly=True)
     description = fields.Char(string='Description')

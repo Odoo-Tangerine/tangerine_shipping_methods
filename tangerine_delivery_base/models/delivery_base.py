@@ -172,7 +172,12 @@ class DeliveryRouteAPI(models.Model):
     _inherit = ['mail.thread']
     _description = 'Delivery Routes API'
 
-    provider_id = fields.Many2one('delivery.carrier', string='Provider', required=True)
+    provider_id = fields.Many2one(
+        'delivery.carrier',
+        string='Provider',
+        required=True,
+        ondelete='cascade'
+    )
     is_need_access_token = fields.Boolean(string='Need Access Token', default=False)
     domain = fields.Char(related='provider_id.domain', string='Domain')
     name = fields.Char(string='Name', tracking=True)
@@ -195,7 +200,13 @@ class DeliveryStatus(models.Model):
     _inherit = ['mail.thread']
     _description = 'Delivery Status'
 
-    provider_id = fields.Many2one('delivery.carrier', string='Provider', required=True, tracking=True)
+    provider_id = fields.Many2one(
+        'delivery.carrier',
+        string='Provider',
+        required=True,
+        tracking=True,
+        ondelete='cascade'
+    )
     name = fields.Char(string='Name', tracking=True, required=True)
     code = fields.Char(string='Code', tracking=True, required=True)
     description = fields.Char(string='Description')

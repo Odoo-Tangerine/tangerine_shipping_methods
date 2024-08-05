@@ -24,8 +24,6 @@ class ProviderGrab(models.Model):
         ('nhat_tin', 'Nhat Tin Logistics')
     ], ondelete={'nhat_tin': lambda recs: recs.write({'delivery_type': 'fixed', 'fixed_price': 0})})
 
-    ntl_partner_id = fields.Char(string='PartnerID')
-
     default_ntl_service_type = fields.Selection(selection=settings.service_type.value, string='Service Type')
     default_ntl_cargo_type = fields.Selection(selection=settings.cargo_type.value, string='Cargo Type')
     default_ntl_payment_method = fields.Selection(selection=settings.payment_method.value, string='Payment Method')
@@ -36,7 +34,7 @@ class ProviderGrab(models.Model):
         elif not order.env.context.get('ntl_payment_method'):
             raise ValidationError(_('The field payment method is required.'))
         return {
-            'partner_id': int(self.ntl_partner_id),
+            'partner_id': int(self.partner_id),
             'weight': math.ceil(order.carrier_id.convert_weight(order._get_estimated_weight(), self.base_weight_unit)),
             'service_id': int(order.env.context.get('ntl_service_type')),
             'payment_method_id': int(order.env.context.get('ntl_payment_method')),
@@ -70,7 +68,7 @@ class ProviderGrab(models.Model):
         sender_id = picking.picking_type_id.warehouse_id.partner_id
         recipient_id = picking.partner_id
         payload = {
-            'partner_id': int(self.ntl_partner_id),
+            'partner_id': int(self.partner_id),
             'ref_code': picking.sale_id.name,
             'weight': math.ceil(self.convert_weight(picking._get_estimated_weight(), self.base_weight_unit)),
             'service_id': int(picking.ntl_service_type),
