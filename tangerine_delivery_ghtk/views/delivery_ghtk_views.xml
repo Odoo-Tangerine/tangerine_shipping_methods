@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form_with_provider_ghtk" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.provider.ghtk</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='access_token']" position="before">
+                <field name="api_key" required="delivery_type == 'ghtk'" widget="CopyClipboardChar" invisible="delivery_type != 'ghtk'"/>
+            </xpath>
+            <xpath expr="//field[@name='token_type']" position="attributes">
+                <attribute name="invisible">delivery_type == 'ghtk'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='default_promo_code']" position='attributes'>
+                <attribute name="invisible">delivery_type == 'ghtk'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='access_token']" position="attributes">
+                <attribute name="invisible">delivery_type == 'ghtk'</attribute>
+            </xpath>
+            <xpath expr="//button[@name='get_access_token']" position="attributes">
+                <attribute name="invisible">delivery_type == 'ghtk'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='base_weight_unit']" position="after">
+                <field name="default_ghtk_payer_type" invisible="delivery_type != 'ghtk'"/>
+                <field name="default_ghtk_transport_type" invisible="delivery_type != 'ghtk'"/>
+                <field name="default_ghtk_service_type" invisible="delivery_type != 'ghtk'"/>
+                <field name="default_ghtk_special_service_type_ids"
+                       widget="many2many_tags"
+                       options="{'no_create': True}"
+                       invisible="delivery_type != 'ghtk'"
+                />
+                <field name="default_ghtk_print_layout" invisible="delivery_type != 'ghtk'"/>
+                <field name="default_ghtk_paper_size" invisible="delivery_type != 'ghtk'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

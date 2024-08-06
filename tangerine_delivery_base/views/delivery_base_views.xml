@@ -91,7 +91,7 @@
                         <group string="API Connect Information" name="delivery_api_connect_information">
                             <label for="domain"/>
                             <div class="o_row api_config_group">
-                                <field name="domain" widget="url"/>
+                                <field name="domain"/>
                                 <button name="action_test_connection"
                                         string="Test Connection"
                                         icon="fa-plug"

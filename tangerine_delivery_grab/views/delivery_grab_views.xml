@@ -6,7 +6,6 @@
         <field name="inherit_id" ref="tangerine_delivery_base.view_delivery_carrier_form_with_provider_delivery_base"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('api_config_group')]" position='after'>
-                <field name="partner_id" widget="CopyClipboardChar" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
                 <field name="client_id" widget="CopyClipboardChar" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
                 <field name="client_secret" widget="CopyClipboardChar" required="delivery_type == 'grab'" invisible="delivery_type != 'grab'"/>
             </xpath>

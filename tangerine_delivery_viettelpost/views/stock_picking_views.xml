@@ -5,14 +5,6 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="tangerine_delivery_base.view_picking_withcarrier_out_form_inherit_delivery_base"/>
         <field name="arch" type="xml">
-            <xpath expr="//button[hasclass('btn_view_detail_order')]" position="after">
-                <button type="object"
-                        name="action_print_order_viettelpost"
-                        string="Print"
-                        class="fa fa-print oe_link"
-                        invisible="delivery_type != 'viettelpost' or not carrier_tracking_ref"
-                />
-            </xpath>
             <xpath expr="//field[@name='promo_code']" position="before">
                 <field name="viettelpost_order_payment"
                        required="delivery_type == 'viettelpost'"

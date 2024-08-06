@@ -40,12 +40,13 @@ class DeliveryBase(models.Model):
         ('L', 'Pounds'),
         ('KG', 'Kilograms'),
         ('G', 'Grams')
-    ], string='Weight Unit')
+    ], string='Weight Unit', required=True)
     default_promo_code = fields.Char(string='Promo Code')
     is_locally_delivery = fields.Boolean(string='Locally Delivery', default=False)
     is_support_multi_stop_delivery = fields.Boolean(string='Have Support for Multi-stop Delivery', default=False)
     is_use_authentication = fields.Boolean(string='Authentication Use', default=False)
     is_webhook_registered = fields.Boolean(string='Webhook Registered', default=False)
+    is_support_feature_print_order = fields.Boolean(default=False)
     webhook_access_token = fields.Char(string='Access Token')
     webhook_url = fields.Char(string='URL')
 
